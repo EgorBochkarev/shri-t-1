@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const SvgSpriteHtmlWebpackPlugin = require('svg-sprite-html-webpack');
 
 module.exports = (env) => {
     return {
@@ -14,6 +15,11 @@ module.exports = (env) => {
             ]
         },
         plugins: [
+            new HtmlWebpackPlugin({
+                title: 'Test', 
+                template: 'pages/test.html',
+                filename: 'test/index.html'
+            }),
             new HtmlWebpackPlugin({
                 title: 'Home', 
                 template: 'pages/start.html',
@@ -33,6 +39,12 @@ module.exports = (env) => {
                 title: 'Settings', 
                 template: 'pages/settings.html',
                 filename: 'settings/index.html'
+            }),
+            new SvgSpriteHtmlWebpackPlugin({
+                includeFiles: [
+                  'src/svg/*.svg',
+                ],
+                append: true
             }),
             new MiniCssExtractPlugin({
                 filename: 'main.css'
