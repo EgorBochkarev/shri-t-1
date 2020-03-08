@@ -1,6 +1,9 @@
 $black-500: #000000;
 $black-400: #111111;
+$black-300: #B3B3B3;
+$black-250: #CCCCCC;
 $black-200: #D9D9D9;
+$black-150: #DBDBDB;
 $black-100: #E6E6E6;
 $black-50: #F2F2F2;
 $black-0: #FFFFFF;
@@ -11,7 +14,9 @@ $green-500: #00B341;
 $red-500: #FF3333;
 $red-600: #E00000;
 $orange-500: #FF9A00;
+$yelow-600: #B38F00;
 $yelow-500: #FFCC00;
+$yelow-400: #F2C200;
 
 
 
@@ -20,14 +25,22 @@ $color-bg-base: $black-0;
 $color-bg-heavy: $black-200;
 $color-bg-light: $blue-grey-50;
 $color-bg-action: $yelow-500;
+$color-bg-action-hovered: $yelow-400;
+$color-bg-action-focused: $yelow-600;
 $color-bg-control: $black-100;
+$color-bg-control-hovered: $black-150;
+$color-bg-control-focused: $black-300;
+$color-bg-disabled: $black-50;
+
 
 $color-text: $black-500;
+$color-text-second: $black-250;
 $color-ghost-text: $blue-grey-500;
 $color-under-text: $blue-grey-600;
 $color-link-text: $red-600;
 
 $color-done: $green-500;
 $color-fail: $red-500;
+$color-require: $red-500;
 $color-panding: $orange-500;
 

@@ -1,15 +1,21 @@
 @import 'text';
+@import 'color';
+
 .field {
+    position: relative;
     &__label {
         @extend .text;
         @extend .text_size_xs;
     }
+    &__require-sign {
+        color: $color-require;
+    }
     &__input {
         @extend .text;
         @extend .text_size_xxxs;
-        border: 2px solid #D9D9D9;
+        border: 2px solid $color-bg-heavy;
         &:focus {
-            border: 2px solid #B3B3B3;
+            border: 2px solid $color-bg-control-focused;
             outline-offset: none;
             outline: none;
         }
@@ -33,6 +39,12 @@
         @extend .text;
         @extend .text_size_xs;
         @extend .text_view_under-text;
+    }
+    &__clear-icon {
+        fill: $color-text-second;
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
     }
     &_align {
         &_horisontal {

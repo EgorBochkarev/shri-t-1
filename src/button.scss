@@ -9,6 +9,15 @@
     border-radius: 4px;
     height: 28px;
     background-color: $color-bg-control;
+    &:hover {
+        background-color: $color-bg-control-hovered
+    }
+    &:focus {
+        border: 2px solid $color-bg-control-focused;
+        outline-offset: none;
+        outline: none;
+    }
+    cursor: pointer;
     &__text {
         padding: 0 5px;
         margin: 0 auto;
@@ -34,9 +43,25 @@
     &_type {
         &_action {
             background-color: $color-bg-action;
+            &:hover {
+                background-color: $color-bg-action-hovered;
+            }
+            &:focus {
+                border: 2px solid $color-bg-action-focused;
+            }
         }
         &_control {
             background-color: $color-bg-control;
+            &:hover {
+                background-color: $color-bg-control-hovered
+            }
+        }
+        &_disabled {
+            cursor: none;
+            background-color: $color-bg-disabled;
+            &:hover {
+                background-color: $color-bg-disabled
+            }
         }
     }
 }
