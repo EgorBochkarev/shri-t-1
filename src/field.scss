@@ -35,16 +35,20 @@
             }
         }
     }
-    &__unit {
-        @extend .text;
-        @extend .text_size_xs;
-        @extend .text_view_under-text;
+    &__input:not(:placeholder-shown) ~ &__clear-icon {
+        display: inherit;
     }
     &__clear-icon {
         fill: $color-text-second;
         position: absolute;
+        display: none;
         right: 10px;
         bottom: 10px;
+    }
+    &__unit {
+        @extend .text;
+        @extend .text_size_xs;
+        @extend .text_view_under-text;
     }
     &_align {
         &_horisontal {
