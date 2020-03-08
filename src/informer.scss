@@ -1,0 +1,10 @@
+.informer {
+    max-width: 264px;
+    text-align: center;
+    &__icon {
+        opacity: 0.1;
+    }
+    &__text {
+        margin: 32px 0 24px;
+    }
+}

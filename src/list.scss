@@ -1,0 +1,16 @@
+@import 'layout';
+@import 'adaptive';
+
+.list {
+    @include layout(8px, column);
+    padding-top: 8px;
+    &__button {
+        align-self: flex-start;
+    }
+}
+
+@media screen and (max-width: $break-point) {
+    .list__button {
+        align-self: initial;
+    }
+}

@@ -4,6 +4,142 @@
         <meta charset="utf-8">
         <title><%= htmlWebpackPlugin.options.title %></title>
     </head>
-    <body>
+    <body class="page">
+        <header class="header">
+            <div class="content content_align_horisontal">
+                <h1 class="header__title text text_size_l text_weight_medium text_view_ghost">School CI server</h1>
+                <div class="header__tools">
+                    <a href="details" class="button button_size_s">
+                        <svg class="icon">
+                            <use xlink:href="#rebuild"></use>
+                        </svg>
+                        <span class="button__text button__text_adaptive text text_size_xxs">Rebuild</span>
+                    </a>
+                    <a href="settings" class="button button_size_s">
+                        <svg class="icon">
+                            <use xlink:href="#settings"></use>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </header>
+        <sector class="page__scrolled-container">
+            <div class="content">
+                <div class="card card_clickable card_type_fail card_view_detail">
+                    <svg class="card__icon icon icon_size_xl">
+                        <use xlink:href="#done"></use>
+                    </svg>
+                    <div class="card__body">
+                        <span class="card__title"><span class="card__id">#1234</span>add documentation for postgres scaler</span>
+                        <div class="card__content">
+                            <div class="extend-icon">
+                                <svg class="extend-icon__icon icon icon_size_l">
+                                    <use xlink:href="#code-commit"></use>
+                                </svg>
+                                <span class="extend-icon__label">master</span>
+                                <span class="extend-icon__sub-label">9c9f0b9</span>
+                            </div>
+                            <div class="extend-icon">
+                                <svg class="extend-icon__icon icon icon_size_l">
+                                    <use xlink:href="#user"></use>
+                                </svg>
+                                <span class="extend-icon__label">Philip Kirkorov</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card__meta">
+                        <div class="extend-icon">
+                            <svg class="extend-icon__icon icon icon_size_l">
+                                <use xlink:href="#calendar"></use>
+                            </svg>
+                            <span class="extend-icon__label">21 янв, 03:06</span>
+                        </div>
+                        <div class="extend-icon">
+                            <svg class="extend-icon__icon icon icon_size_l">
+                                <use xlink:href="#stopwatch"></use>
+                            </svg>
+                            <span class="extend-icon__label">1 ч 20 мин</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content content_type_main content_full-adaptive">
+                <pre class="code-presenter">
+Hash: 3f13ca663b1e0d89cafb
+Version: webpack 4.42.0
+Time: 2443ms
+Built at: 07/03/2020 21:35:11
+              Asset      Size  Chunks             Chunk Names
+ details/index.html    11 KiB          [emitted]  
+ history/index.html  11.2 KiB          [emitted]  
+         index.html  12.7 KiB          [emitted]  
+           main.css  18.4 KiB    main  [emitted]  main
+            main.js  4.43 KiB    main  [emitted]  main
+settings/index.html  10.4 KiB          [emitted]  
+    test/index.html  10.3 KiB          [emitted]  
+Entrypoint main = main.css main.js
+[./src/index.js] 21 bytes {main} [built]
+[./src/main.scss] 39 bytes {main} [built]
+    + 1 hidden module
+Child html-webpack-plugin for "details/index.html":
+     1 asset
+    Entrypoint undefined = details/index.html
+    [./node_modules/html-webpack-plugin/lib/loader.js!./pages/details.html] 3.98 KiB {0} [built]
+    [./node_modules/webpack/buildin/global.js] (webpack)/buildin/global.js 472 bytes {0} [built]
+    [./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 497 bytes {0} [built]
+        + 1 hidden module
+Child html-webpack-plugin for "history/index.html":
+     1 asset
+    Entrypoint undefined = history/index.html
+    [./node_modules/html-webpack-plugin/lib/loader.js!./pages/history.html] 4.22 KiB {0} [built]
+    [./node_modules/webpack/buildin/global.js] (webpack)/buildin/global.js 472 bytes {0} [built]
+    [./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 497 bytes {0} [built]
+        + 1 hidden module
+Child html-webpack-plugin for "index.html":
+     1 asset
+    Entrypoint undefined = index.html
+    [./node_modules/html-webpack-plugin/lib/loader.js!./pages/start.html] 5.67 KiB {0} [built]
+    [./node_modules/webpack/buildin/global.js] (webpack)/buildin/global.js 472 bytes {0} [built]
+    [./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 497 bytes {0} [built]
+        + 1 hidden module
+Child html-webpack-plugin for "settings/index.html":
+     1 asset
+    Entrypoint undefined = settings/index.html
+    [./node_modules/html-webpack-plugin/lib/loader.js!./pages/settings.html] 3.36 KiB {0} [built]
+    [./node_modules/webpack/buildin/global.js] (webpack)/buildin/global.js 472 bytes {0} [built]
+    [./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 497 bytes {0} [built]
+        + 1 hidden module
+Child html-webpack-plugin for "test/index.html":
+     1 asset
+    Entrypoint undefined = test/index.html
+    [./node_modules/html-webpack-plugin/lib/loader.js!./pages/test.html] 3.3 KiB {0} [built]
+    [./node_modules/webpack/buildin/global.js] (webpack)/buildin/global.js 472 bytes {0} [built]
+    [./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 497 bytes {0} [built]
+        + 1 hidden module
+Child mini-css-extract-plugin node_modules/css-loader/dist/cjs.js!node_modules/sass-loader/dist/cjs.js!src/main.scss:
+    Entrypoint mini-css-extract-plugin = *
+    [./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/main.scss] 19.5 KiB {mini-css-extract-plugin} [built]
+        + 1 hidden module
+
+
+   ╭────────────────────────────────────────────────────────────────╮
+   │                                                                │
+   │      New minor version of npm available! 6.13.7 → 6.14.2       │
+   │   Changelog: https://github.com/npm/cli/releases/tag/v6.14.2   │
+   │               Run npm install -g npm to update!                │
+   │                                                                │
+   ╰────────────────────────────────────────────────────────────────╯
+                </pre>
+            </div>
+        </sector>
+        <footer class="footer">
+            <div class="content content_align_horisontal">
+                <div class="footer__info">
+                    <a class="text text_size_xs text_view_link">Support</a>
+                    <a class="text text_size_xs text_view_link">Learning</a>
+                </div>
+                <span class="text text_size_xs text_view_ghost">© 2020 Your Name</span>
+            </div>
+        </footer>
     </body>
 </html>

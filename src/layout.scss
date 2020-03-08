@@ -1,0 +1,17 @@
+@mixin layout($interval, $direction: row) {
+    display: flex;
+    flex-direction: $direction;
+    $prop: margin-left;
+    $prop-revert: margin-top;
+    @if $direction == column {
+        $prop: margin-top;
+        $prop-revert: margin-left;
+    }
+    & > * {
+        #{$prop}: $interval;
+        #{$prop-revert}: 0;
+        &:first-child {
+            #{$prop}: 0;
+        }
+    }
+}

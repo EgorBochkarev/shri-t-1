@@ -4,6 +4,79 @@
         <meta charset="utf-8">
         <title><%= htmlWebpackPlugin.options.title %></title>
     </head>
-    <body>
+    <body class="page">
+        <header class="header">
+            <div class="content content_align_horisontal">
+                <h1 class="header__title text text_size_l text_weight_medium">philip1967/my-aw esome-repo-with-long-long-long-repo-name</h1>
+                <div class="header__tools">
+                    <a href="details" class="button button_size_s">
+                        <svg class="icon">
+                            <use xlink:href="#play"></use>
+                        </svg>
+                        <span class="button__text button__text_adaptive text text_size_xxs">Run build</span>
+                    </a>
+                    <a href="settings" class="button button_size_s">
+                        <svg class="icon">
+                            <use xlink:href="#settings"></use>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </header>
+        <sector class="page__scrolled-container">
+            <div class="content content_type_main">
+                <div class="list">
+                    <div class="card card_clickable card_type_done">
+                        <svg class="card__icon icon icon_size_xl">
+                            <use xlink:href="#done"></use>
+                        </svg>
+                        <div class="card__body">
+                            <span class="card__title"><span class="card__id">#1234</span>add documentation for postgres scaler</span>
+                            <div class="card__content">
+                                <div class="extend-icon">
+                                    <svg class="extend-icon__icon icon icon_size_l">
+                                        <use xlink:href="#code-commit"></use>
+                                    </svg>
+                                    <span class="extend-icon__label">master</span>
+                                    <span class="extend-icon__sub-label">9c9f0b9</span>
+                                </div>
+                                <div class="extend-icon">
+                                    <svg class="extend-icon__icon icon icon_size_l">
+                                        <use xlink:href="#user"></use>
+                                    </svg>
+                                    <span class="extend-icon__label">Philip Kirkorov</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card__meta">
+                            <div class="extend-icon">
+                                <svg class="extend-icon__icon icon icon_size_l">
+                                    <use xlink:href="#calendar"></use>
+                                </svg>
+                                <span class="extend-icon__label">21 янв, 03:06</span>
+                            </div>
+                            <div class="extend-icon">
+                                <svg class="extend-icon__icon icon icon_size_l">
+                                    <use xlink:href="#stopwatch"></use>
+                                </svg>
+                                <span class="extend-icon__label">1 ч 20 мин</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="list__button button button_size_s">
+                        <span class="button__text text text_size_xxs">Show more</span>
+                    </button>
+                </div>
+            </div>
+        </sector>
+        <footer class="footer">
+            <div class="content content_align_horisontal">
+                <div class="footer__info">
+                    <a class="text text_size_xs text_view_link">Support</a>
+                    <a class="text text_size_xs text_view_link">Learning</a>
+                </div>
+                <span class="text text_size_xs text_view_ghost">© 2020 Your Name</span>
+            </div>
+        </footer>
     </body>
 </html>

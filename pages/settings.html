@@ -4,6 +4,59 @@
         <meta charset="utf-8">
         <title><%= htmlWebpackPlugin.options.title %></title>
     </head>
-    <body>
+    <body class="page">
+        <header class="header">
+            <div class="content content_align_horisontal">
+                <h1 class="header__title text text_size_l text_weight_medium text_view_ghost">School CI server</h1>
+            </div>
+        </header>
+        <sector class="page__scrolled-container">
+            <div class="content content_type_main">
+                <form class="form">
+                    <div class="form__title">
+                        <p class="text text_size_s text_weight_bold">Settings</p>
+                        <p class="text text_size_xs text_view_ghost">Configure repository connection and synchronization settings</p>
+                    </div>
+                    <div class="form__field field field_justify_stretch">
+                        <label class="field__label">GitHub repository
+                            <input class="field__input" type="text" placeholder="user-name/repo-name" required>
+                        </label>
+                    </div>
+                    <div class="form__field field field_justify_stretch">
+                        <label class="field__label">Build command
+                            <input class="field__input" type="text" placeholder="bash command">
+                        </label>
+                    </div>
+                    <div class="form__field field field_justify_stretch">
+                        <label class="field__label">Main branch
+                            <input class="field__input" type="text" placeholder="branch name">
+                        </label>
+                    </div>
+                    <div class="form__field form__field_small field field_align_horisontal">
+                        <label class="field__label">Synchronize every
+                            <input class="field__input field__input_type_numder" type="number" placeholder="branch name" value="10">
+                            <span class="field__unit">minutes</span>
+                        </label>
+                    </div>
+                    <div class="form__tools">
+                        <button class="button button_size_m button_type_action">
+                            <span class="button__text text text_size_xxs">Save</span>
+                        </button>
+                        <button class="button button_size_m">
+                            <span class="button__text text text_size_xxs">Cancel</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </sector>
+        <footer class="footer">
+            <div class="content content_align_horisontal">
+                <div class="footer__info">
+                    <a class="text text_size_xs text_view_link">Support</a>
+                    <a class="text text_size_xs text_view_link">Learning</a>
+                </div>
+                <span class="text text_size_xs text_view_ghost">© 2020 Your Name</span>
+            </div>
+        </footer>
     </body>
 </html>
