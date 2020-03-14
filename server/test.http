@@ -1,0 +1,59 @@
+### Get settings
+GET http://localhost:3000/api/settings
+### Set settings
+POST http://localhost:3000/api/settings
+Content-Type: application/json
+
+{
+    "repoName": "EgorBochkarev/tire-fitting",
+    "buildCommand": "npm test",
+    "mainBranch": "master",
+    "period": 0
+}
+
+### Delete settings
+DELETE http://localhost:3000/api/settings
+
+
+### Get all builds
+GET http://localhost:3000/api/builds?offset=0&limit=20
+
+
+### Get build info
+GET http://localhost:3000/api/builds/d06857d3-e880-4213-8f9d-239f059062c5
+
+
+### Get build logs
+GET http://localhost:3000/api/builds/d06857d3-e880-4213-8f9d-239f059062c5/logs
+
+
+### Start build of commit 1
+POST http://localhost:3000/api/builds/1933a6940a88d51e8850c8047e14b1df0d3ad386
+
+
+### Start build of commit 2
+POST http://localhost:3000/api/builds/d4815eebecb74f5d123d1fd1175fff4cbce025c2
+
+
+### Start build of commit 3
+POST http://localhost:3000/api/builds/414b46ff6652216a25d41f9b4521639b6c37b5a3
+
+### Start build of commit 4
+POST http://localhost:3000/api/builds/a9d07f369d34b27fde419a71ad3b278041f53623
+
+
+
+
+
+
+
+
+### Get commits
+GET https://api.github.com/repos/EgorBochkarev/tire-fitting/commits
+Accept: application/vnd.github.cloak-preview
+
+### Get commit
+GET https://api.github.com/repos/EgorBochkarev/tire-fitting/commits/1933a6940a88d51e8850c8047e14b1df0d3ad386
+Accept: application/vnd.github.cloak-preview
+
+###
