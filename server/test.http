@@ -24,7 +24,7 @@ GET http://localhost:3000/api/builds/e3b35f05-8a44-4dbb-ac41-2017d32a0d15
 
 
 ### Get build logs
-GET http://localhost:3000/api/builds/e3b35f05-8a44-4dbb-ac41-2017d32a0d15/logs
+GET http://localhost:3000/api/builds/cde868a4-4f69-4a90-af1d-505c6fbe016d/logs
 
 
 ### Start build of commit 1

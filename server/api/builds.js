@@ -28,8 +28,8 @@ exports.initBuildsApi = (app, baseUrl) => {
     })
 
     app.get(`${baseUrl}/:buildId/logs`, (req, res) => {
-        BuildDTO.getBuildLog(req.params.buildId).then(({ data }) => {
-            res.send(data)
+        BuildDTO.getBuildLog(req.params.buildId).then(logs => {
+            res.send(logs)
         })
     })
 

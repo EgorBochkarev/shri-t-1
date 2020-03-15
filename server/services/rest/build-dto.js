@@ -1,4 +1,5 @@
 const SecurityService = require('../oauth2/security-service');
+const NodeCache = require( "node-cache" );
 
 class BuildDTO extends SecurityService {
     static async getBuildList(offset, limit) {
@@ -9,10 +10,20 @@ class BuildDTO extends SecurityService {
         return SecurityService.axiosInstance.get(myURL.toString()).then(({ data }) => data);
     }
     static async getBuildLog(buildId) {
+        if (BuildDTO.logCache.has(buildId)) {
+            return BuildDTO.logCache.get(buildId);
+        }
         const myURL = new URL('https://hw.shri.yandex/api/build/log');
         //Add some validation
         buildId && myURL.searchParams.append('buildId', buildId);
-        return SecurityService.axiosInstance.get(myURL.toString());
+        return SecurityService.axiosInstance.get(myURL.toString()).then(({ data }) => {
+            try {
+                BuildDTO.logCache.set(buildId, data);
+            } catch(e) {
+                console.log('Cashe limit was succed');
+            }
+            return data;
+        });
     }
     static async getBuildDetails(buildId) {
         const myURL = new URL('https://hw.shri.yandex/api/build/details');
@@ -62,5 +73,8 @@ class BuildDTO extends SecurityService {
         });
     }
 }
-
+BuildDTO.logCache = new NodeCache({
+    stdTTL: 3600,
+    maxKeys: 200
+});
 module.exports = BuildDTO;
