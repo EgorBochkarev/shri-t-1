@@ -5,10 +5,18 @@ const Queue = require('./queue');
 const { exec } = require('child_process');
  
 class Builder {
-    static async setToQueue(commitHash) {
+    static async setToQueue(commitHash, branch) {
         const config = await ConfigDTO.getConf();
-        const commit = await GitDTO.getCommit(config.repoName, commitHash);
-        commit.setBranchName(config.mainBranch);
+        const promises = [GitDTO.getCommit(config.repoName, commitHash)];
+        if (!branch) {
+            promises.push(GitDTO.getCommitBranches(config.repoName, commitHash));
+        }
+        const [ commit, branches ] = await Promise.all([promises]);
+        if (branches) {
+            //get first bransh where this commit is HEAD
+            branch = branches[0];
+        }
+        commit.setBranchName(branch || config.mainBranch);
         await BuildDTO.setBuildRequest(commit);
         //Here we can not to find right build, it will be bag
         const build = await BuildDTO.getBuildList(0, 20).then(({ data }) => {
