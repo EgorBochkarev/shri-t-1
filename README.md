@@ -36,8 +36,14 @@
 
 ## Info
 
-* Запуск npm srart
+* Для установки запустите npm i и docker deamon
+* Запуск верстки npm srart
+* Запуск сервера ACCESS_TOKEN={your_token} npm run start-server, для запуска необходим докер
 * Мое задание можно использовать как показательный пример ошибок
+
+## Bugs
+* Error-handling
+* 
 
 ## Links
 [Figma](https://www.figma.com/file/vA6BJJ3AiWar3Q3bq30eyG/SHRI-homework-specification)
