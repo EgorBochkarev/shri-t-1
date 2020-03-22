@@ -36,7 +36,9 @@
 
 ## Info
 
-* Запуск npm srart
+* Для установки запустите npm i и docker deamon
+* Запуск верстки npm srart
+* Запуск сервера ACCESS_TOKEN={your_token} npm run start-server, для запуска необходим докер
 * Мое задание можно использовать как показательный пример ошибок
 
 ## Bugs
