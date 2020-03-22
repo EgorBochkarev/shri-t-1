@@ -4,6 +4,7 @@ class Queue {
   static setToQueue(object) {
     return new Promise((resolve) => {
       const makeRequest = function makeRequest() {
+        // eslint-disable-next-line no-invalid-this
         const jsQueue = this;
         resolve({
           object: object,
