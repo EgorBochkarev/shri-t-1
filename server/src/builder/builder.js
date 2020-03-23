@@ -12,7 +12,7 @@ class Builder {
     if (!branch) {
       promises.push(GitDTO.getCommitBranches(repoName, commitHash));
     }
-    const [commit, branches] = await Promise.all([promises]);
+    const [commit, branches] = await Promise.all(promises);
     if (branches) {
       // get first bransh where this commit is HEAD
       branch = branches[0];
@@ -32,10 +32,12 @@ class Builder {
   }
 
   static async startBuild(build, config) {
+    console.log(`Start build ${build.id}`);
     const [buildResult] = await Promise.all([
       Builder.build(build, config),
       BuildDTO.setBuildStart(build.id),
     ]);
+    console.log(`Finish build ${build.id}`);
     return BuildDTO.setBuildFinish(buildResult);
   }
 
