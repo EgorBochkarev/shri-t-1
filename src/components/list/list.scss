@@ -1,5 +1,6 @@
-@import 'layout';
-@import 'adaptive';
+@import '../../scss/color';
+@import '../../scss/layout';
+@import '../../scss/adaptive';
 
 .list {
     @include layout(8px, column);

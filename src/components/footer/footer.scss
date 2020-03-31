@@ -1,5 +1,7 @@
-@import 'adaptive';
-@import 'layout';
+@import '../../scss/color';
+@import '../../scss/text';
+@import '../../scss/adaptive';
+@import '../../scss/layout';
 
 .footer {
     background-color: $color-bg-light;

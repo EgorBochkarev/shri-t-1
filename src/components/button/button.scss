@@ -1,6 +1,6 @@
-@import 'color';
-@import 'text';
-@import 'adaptive';
+@import '../../scss/color';
+@import '../../scss/text';
+@import '../../scss/adaptive';
 
 .button {
     display: flex;
@@ -57,10 +57,13 @@
             }
         }
         &_disabled {
-            cursor: none;
+            cursor: default;
             background-color: $color-bg-disabled;
             &:hover {
                 background-color: $color-bg-disabled
+            }
+            &:focus {
+                border: none;
             }
         }
     }

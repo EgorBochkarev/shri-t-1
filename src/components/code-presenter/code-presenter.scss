@@ -1,7 +1,7 @@
+@import '../../scss/color';
 .code-presenter {
-    background-color: red;
     overflow: scroll;
-    background: #F2F2F2;
+    background: $black-50;
     border-radius: 6px;
     padding: 8px 12px;
 }

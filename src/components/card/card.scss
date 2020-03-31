@@ -1,8 +1,8 @@
-@import 'color';
-@import 'text';
-@import 'icon';
-@import 'layout';
-@import 'adaptive';
+@import '../../scss/color';
+@import '../../scss/text';
+@import '../icon/icon';
+@import '../../scss/layout';
+@import '../../scss/adaptive';
 
 .card {
     position: relative;
