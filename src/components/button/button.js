@@ -24,8 +24,8 @@ function Button(
       {...props}
       onClick={() => onClick && onClick()}
     >
-      { icon && <Icon icon={icon}></Icon> }
-      { text && <span className="button__text">{text}</span> }
+      { icon ? <Icon icon={icon}></Icon> : null }
+      { text ? <span className="button__text">{text}</span> : null }
     </button>
   );
 }

@@ -36,7 +36,7 @@ function Field(props) {
   return (
     <div className={classes.join(' ')}>
       <label className="field__label">{label}
-        { required && <span className="field__require-sign">*</span> }
+        { required ? <span className="field__require-sign">*</span> : null }
         <input
           ref={inputRef}
           name={name}
@@ -61,7 +61,7 @@ function Field(props) {
             }}
           />
         }
-        { unit && <span className="field__unit">{unit}</span> }
+        { unit ? <span className="field__unit">{unit}</span> : null }
       </label>
     </div>
   );

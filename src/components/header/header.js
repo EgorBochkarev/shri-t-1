@@ -3,13 +3,13 @@ import './header.scss';
 
 
 function Header({title, children}) {
-  const titleClass = `header__title text text_size_xl text_weight_medium${title ? '' : ' text_view_ghost'}`;
+  const titleClass = `header__title ${title ? '' : ' text_view_ghost'}`;
   title = title || 'School CI server';
   return (
     <header className="header">
       <div className="content content_align_horisontal">
         <h1 className={titleClass}>{title}</h1>
-        { children && <div className="header__tools">{children}</div> }
+        { children ? <div className="header__tools">{children}</div> : null }
       </div>
     </header>
   );

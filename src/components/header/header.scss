@@ -1,6 +1,9 @@
 .header {
     &__title {
         align-self: center;
+        @extend .text;
+        @extend .text_size_xl;
+        @extend .text_weight_medium;
     }
     &__tools {
         display: flex;
