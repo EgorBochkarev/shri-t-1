@@ -2,6 +2,7 @@ import React from 'react';
 import Icon from '../icon';
 import ExtendIcon from '../extend-icon';
 import cn from '../../utils/class-name';
+import {formatISODate, countDuration} from '../../utils/date-formatter';
 import './card.scss';
 
 const StatusMap = {
@@ -13,7 +14,10 @@ const StatusMap = {
 };
 
 function Card({className, clickable, view, data}) {
-  const {buildNumber, commitMessage, commitHash, branchName, authorName, status, start, duration} = data;
+  const {
+    buildNumber, commitMessage, commitHash,
+    branchName, authorName, status, start, duration
+  } = data;
   const classes = [
     cn('card')({
       view,
@@ -31,13 +35,17 @@ function Card({className, clickable, view, data}) {
           {commitMessage}
         </span>
         <div className="card__content">
-          <ExtendIcon icon="code-commit" label={branchName} subLabel={commitHash}/>
+          <ExtendIcon
+            icon="code-commit"
+            label={branchName}
+            subLabel={commitHash}
+          />
           <ExtendIcon icon="user">{authorName}</ExtendIcon>
         </div>
       </div>
       <div className="card__meta">
-        <ExtendIcon icon="calendar">{start}</ExtendIcon>
-        <ExtendIcon icon="stopwatch">{duration}</ExtendIcon>
+        <ExtendIcon icon="calendar">{formatISODate(start)}</ExtendIcon>
+        <ExtendIcon icon="stopwatch">{countDuration(duration)}</ExtendIcon>
       </div>
     </div>
   );
