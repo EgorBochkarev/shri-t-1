@@ -23,6 +23,13 @@ function Field(props) {
   ];
   const inputClass = `field__input field__input_type_${type}`;
   const onClickFn = (value) => {
+    switch (type) {
+      case 'number':
+        value = Number.parseFloat(value);
+        break;
+      default:
+        value = value;
+    }
     onChange && onChange(value, name);
   };
   const inputRef = React.createRef();
@@ -59,4 +66,4 @@ function Field(props) {
     </div>
   );
 }
-export default Field;
+export default React.memo(Field);
