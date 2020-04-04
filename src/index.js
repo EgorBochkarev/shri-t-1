@@ -11,5 +11,10 @@ import reduser from './reducer';
 import App from './components/app';
 
 const store = createStore(reduser, applyMiddleware(thunk));
-ReactDOM.render(<Provider store={store}><App/></Provider>,
-    document.getElementById('root'));
+ReactDOM.render(
+    <Provider store={store}>
+      <App/>
+      <div className="pop-up" id="pop-up"/>
+    </Provider>,
+    document.getElementById('root')
+);

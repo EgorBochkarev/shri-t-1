@@ -3,7 +3,7 @@ import './header.scss';
 
 
 function Header({title, children}) {
-  const titleClass = `header__title text text_size_l text_weight_medium${title ? '' : ' text_view_ghost'}`;
+  const titleClass = `header__title text text_size_xl text_weight_medium${title ? '' : ' text_view_ghost'}`;
   title = title || 'School CI server';
   return (
     <header className="header">
