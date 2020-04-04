@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {Router, Route, Switch} from 'react-router-dom';
+
+import history from '../../history';
 
 import Details from '../pages/details';
 import Default from '../pages/default';
@@ -13,7 +15,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="page">
-        <Router>
+        <Router history={history}>
           <Switch>
             <Route exact path="/">
               <Default></Default>

@@ -1,4 +1,5 @@
 import RestService from './services/rest-service';
+import history from './history';
 
 const restService = new RestService();
 const BUILDS_LIMIT = 10;
@@ -21,6 +22,10 @@ const loadInitialPageData = () => (dispatch, getState) => {
         dispatch(loadBuildLogs(buildId));
       }
   }
+};
+
+const redirect = (path) => () => {
+  return history.push(path);
 };
 
 const loadSettings = () => (dispatch, getState) => {
@@ -76,5 +81,6 @@ export {
   loadMoreBuilds,
   loadBuild,
   loadBuildLogs,
-  startBuild
+  startBuild,
+  redirect
 };
