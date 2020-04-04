@@ -18,26 +18,26 @@ export default class App extends Component {
         <Router history={history}>
           <Switch>
             <Route exact path="/">
-              <Default></Default>
+              <Default/>
             </Route>
             <Route path="/start">
-              <Start></Start>
+              <Start/>
             </Route>
             <Route path="/settings">
-              <Settings></Settings>
+              <Settings/>
             </Route>
             <Route path="/history">
-              <History></History>
+              <History/>
             </Route>
             <Route path="/build/:id?">
-              <Details></Details>
+              <Details/>
             </Route>
             <Route>
               <div>Page not found</div>
             </Route>
           </Switch>
         </Router>
-        <Footer></Footer>
+        <Footer/>
       </div>
     );
   };
