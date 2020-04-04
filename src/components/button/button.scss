@@ -22,6 +22,8 @@
         padding: 0 5px;
         margin: 0 auto;
         white-space: nowrap;
+        @extend .text;
+        @extend .text_size_xxs;
     }
     &_size {
         &_s {
@@ -29,7 +31,6 @@
             padding: 0px 8px;
             .button__text {
                 line-height: $size-typo-xxxl;
-                
             }
         }
         &_m {
@@ -70,7 +71,9 @@
 }
 
 @media screen and (max-width: $break-point) {
-    .button__text_adaptive {
-        display: none;
-    }   
+    .button_adaptive {
+        .button__text {
+            display: none;
+        }
+    }
 }
