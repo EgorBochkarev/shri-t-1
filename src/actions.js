@@ -36,7 +36,8 @@ const loadSettings = () => (dispatch, getState) => {
 
 const saveSettings = (settings) => (dispatch, getState) => {
   return restService.setSettings(settings).then((settings) => {
-    return dispatch(setSettings(settings));
+    dispatch(setSettings(settings));
+    dispatch(redirect('/'));
   });
 };
 
@@ -64,6 +65,7 @@ const loadBuildLogs = (id) => (dispatch, getState) => {
 const startBuild = (commitHash) => (dispatch, getState) => {
   return restService.startBuild(commitHash).then((build) => {
     dispatch(setBuild(build));
+    dispatch(redirect(`/build/${build.id}`));
   });
 };
 
