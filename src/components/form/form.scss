@@ -20,6 +20,11 @@
         margin: 24px 0;
         @include layout(8px);
     }
+    &_type_small {
+        .form__tools {
+            margin: 12px 0 0;
+        }
+    }
 }
 
 @media screen and (max-width: $break-point) {

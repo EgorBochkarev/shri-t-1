@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {Link} from 'react-router-dom';
 
 import Button from '../button';
 import Field from '../field';
 import './form.scss';
 
-function Form({className, title, description, metaData, data = {}, onSubmit}) {
+function Form({className, title, description, type, metaData, data = {}, onSubmit, onCancel}) {
   const classes = [
     'form',
+    type ? `form_type_${type}` : '',
     className || ''
   ];
 
@@ -17,10 +17,10 @@ function Form({className, title, description, metaData, data = {}, onSubmit}) {
   }, [data]);
   return (
     <form className={classes.join(' ')} onSubmit={(e) => e.preventDefault()}>
-      <div className="form__title">
+      {(title || description) && <div className="form__title">
         <p className="text text_size_s text_weight_bold">{title}</p>
         <p className="text text_size_xs text_view_ghost">{description}</p>
-      </div>
+      </div>}
       {metaData.map(({fieldClass, ...fieldMetaData}) => {
         return <Field
           key={fieldMetaData.name}
@@ -32,13 +32,14 @@ function Form({className, title, description, metaData, data = {}, onSubmit}) {
               ...formData,
               [name]: value
             });
-          }}/>;
+          }}
+        />;
       })}
       <div className="form__tools">
-        <Button size="m" type="action" onClick={() => onSubmit(formData)}>Save</Button>
-        <Link to="/">
-          <Button size="m">Cancel</Button>
-        </Link>
+        <Button size="m" type="action" onClick={() => {
+          onSubmit(formData);
+        }}>Save</Button>
+        <Button size="m" onClick={onCancel}>Cancel</Button>
       </div>
     </form>
   );

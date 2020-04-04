@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 
-import {loadInitialPageData, startBuild, saveSettings} from '../../actions';
+import {loadInitialPageData, startBuild, saveSettings, redirect} from '../../actions';
 
 import Form from '../form/form';
 import Header from '../header';
 
-function Settings({settings, onMount, onSubmit}) {
+function Settings({settings, onMount, onSubmit, onCancel}) {
   useEffect(() => {
     onMount();
   }, []);
@@ -44,7 +44,7 @@ function Settings({settings, onMount, onSubmit}) {
               horizontal: true,
               fieldClass: 'form__field_small'
             }
-          ]} data={settings} onSubmit={onSubmit}>
+          ]} data={settings} onSubmit={onSubmit} onCancel={onCancel}>
           </Form>
         </div>
       </div>
@@ -61,6 +61,7 @@ const mapStateToProps = ({settings}) => {
 export default connect(mapStateToProps, {
   onMount: loadInitialPageData,
   save: startBuild,
-  onSubmit: saveSettings
+  onSubmit: saveSettings,
+  onCancel: () => redirect('/')
 })(Settings);
 
