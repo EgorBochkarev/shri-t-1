@@ -1,5 +1,6 @@
 import React from 'react';
 import Icon from '../icon';
+import cn from '../../utils/class-name';
 import './button.scss';
 
 
@@ -11,10 +12,7 @@ function Button(
     }) {
   text = text || children;
   const classes = [
-    'button',
-    size ? `button_size_${size}` : '',
-    type ? `button_type_${type}` : '',
-    adaptive ? 'button_adaptive': '',
+    cn('button')({size, type, adaptive}),
     className || ''
   ];
   return (
@@ -25,7 +23,7 @@ function Button(
       onClick={() => onClick && onClick()}
     >
       { icon ? <Icon icon={icon}></Icon> : null }
-      { text ? <span className="button__text">{text}</span> : null }
+      { text ? <span className={cn('button')('text')}>{text}</span> : null }
     </button>
   );
 }
