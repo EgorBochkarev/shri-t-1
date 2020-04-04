@@ -17,4 +17,4 @@ function PopUp({children, show, title, onApply}) {
       document.getElementById('pop-up'),
   );
 }
-export default PopUp;
+export default React.memo(PopUp);
