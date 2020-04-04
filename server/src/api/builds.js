@@ -17,8 +17,8 @@ exports.initBuildsApi = (app, baseUrl) => {
   });
 
   app.get(`${baseUrl}/:buildId`, (req, res) => {
-    BuildDTO.getBuildDetails(req.params.buildId).then(({data}) => {
-      res.json(data.data);
+    BuildDTO.getBuildDetails(req.params.buildId).then((build) => {
+      res.json(build);
     }).catch((error) => {
       res.status(404).json({
         error: 'BUILD_NOT_FOUND',
