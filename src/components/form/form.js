@@ -4,16 +4,18 @@ import Button from '../button';
 import Field from '../field';
 import './form.scss';
 
-function Form({className, title, description, type, metaData, data = {}, onSubmit, onCancel}) {
+function Form({className, title, description, type, metaData, data, onSubmit, onCancel}) {
   const classes = [
     'form',
     type ? `form_type_${type}` : '',
     className || ''
   ];
 
-  const [formData, setFormData] = useState(data);
+  const [formData, setFormData] = useState(!data ? {} : data);
   useEffect(()=> {
-    setFormData(data);
+    if (data && JSON.stringify(data) !== JSON.stringify(formData)) {
+      setFormData(data);
+    }
   }, [data]);
   return (
     <form className={classes.join(' ')} onSubmit={(e) => e.preventDefault()}>
@@ -36,9 +38,7 @@ function Form({className, title, description, type, metaData, data = {}, onSubmi
         />;
       })}
       <div className="form__tools">
-        <Button size="m" type="action" onClick={() => {
-          onSubmit(formData);
-        }}>Save</Button>
+        <Button size="m" type="action" onClick={() => onSubmit(formData)}>Save</Button>
         <Button size="m" onClick={onCancel}>Cancel</Button>
       </div>
     </form>
