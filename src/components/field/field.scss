@@ -26,10 +26,13 @@
         height: 36px;
         width: 100%;
     }
-    &__input:invalid:not(:placeholder-shown) {
+    &__input:invalid:not(:focus) {
         border-color: $color-fail;
     }
-    &__input:not(:placeholder-shown) ~ &__clear-icon {
+    &__input:not(:placeholder-shown):hover ~ &__clear-icon {
+        display: inherit;
+    }
+    &__input:not(:placeholder-shown) ~ &__clear-icon:hover {
         display: inherit;
     }
     &__clear-icon {
