@@ -14,6 +14,7 @@ function Field(props) {
     required,
     placeholder,
     value,
+    pattern,
     type = 'text',
     onChange
   } = props;
@@ -46,6 +47,11 @@ function Field(props) {
           type={type}
           placeholder={placeholder}
           required={required}
+          pattern={
+            pattern ?
+            pattern.toString().substring(1, pattern.toString().length - 1) :
+            null
+          }
           value={value}
           onChange={(e) => {
             onClickFn(e.target.value);

@@ -1,7 +1,10 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 
-import {loadInitialPageData, startBuild, saveSettings, redirect} from '../../actions';
+import {
+  loadInitialPageData, startBuild,
+  saveSettings, redirect
+} from '../../actions';
 
 import Form from '../form/form';
 import Header from '../header';
@@ -20,6 +23,7 @@ function Settings({settings, onMount, onSubmit, onCancel}) {
               name: 'repoName',
               label: 'GitHub repository',
               placeholder: 'user-name/repo-name',
+              pattern: /^[\w-]+\/[\w-]+$/,
               required: true,
               cleanable: true
             },

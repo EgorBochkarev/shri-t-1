@@ -26,6 +26,9 @@
         height: 36px;
         width: 100%;
     }
+    &__input:invalid:not(:placeholder-shown) {
+        border-color: $color-fail;
+    }
     &__input:not(:placeholder-shown) ~ &__clear-icon {
         display: inherit;
     }
