@@ -1,8 +1,8 @@
 export default class RestService {
-    _apiBase = '/api'
+    #apiBase = '/api'
 
     async getResource(url, rowData) {
-        const res = await fetch(`${this._apiBase}${url}`);
+        const res = await fetch(`${this.#apiBase}${url}`);
         if (!res.ok) {
             throw new Error(`Something, ${res.status}`)
         }
@@ -13,7 +13,7 @@ export default class RestService {
     }
 
     async setResource(url, resource) {
-        const res = await fetch(`${this._apiBase}${url}`, {
+        const res = await fetch(`${this.#apiBase}${url}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
@@ -28,7 +28,7 @@ export default class RestService {
     }
 
     async deleteResource(url) {
-        const res = await fetch(`${this._apiBase}${url}`, {
+        const res = await fetch(`${this.#apiBase}${url}`, {
             method: 'DELETE'
         });
         if (!res.ok) {
@@ -66,6 +66,6 @@ export default class RestService {
         return this.setResource(`/builds/${commitHash}`);
     }
     getBuildLogs = (buildId) => {
-        return this.getResource(`/builds/${buildId}/logs`, true);
+        return this.getResource(`/builds/${buildId}/logs/html`, true);
     }
 }

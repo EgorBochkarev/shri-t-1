@@ -8,7 +8,10 @@ function CodePresentor({code, children, className}) {
     className || ''
   ];
   return (
-    <pre className={classes.join(' ')}>{code}</pre>
+    <div
+      className={classes.join(' ')}
+      dangerouslySetInnerHTML={{__html: code}}
+    />
   );
 }
 export default CodePresentor;
