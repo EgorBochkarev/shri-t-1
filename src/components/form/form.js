@@ -32,7 +32,7 @@ function Form({
       {metaData.map(({fieldClass, ...fieldMetaData}) => {
         return <Field
           key={fieldMetaData.name}
-          className={`form__field ${fieldClass}`}
+          className={`form__field ${fieldClass || ''}`}
           {...fieldMetaData}
           value={formData[fieldMetaData.name]}
           onChange={(value, name) => {

@@ -24,16 +24,7 @@
         padding: 0 13px;
         border-radius: 4px;
         height: 36px;
-        &_type_numder {
-            width: 52px;
-            -moz-appearance: textfield;
-            text-align: end;
-            &::-webkit-outer-spin-button,
-            &::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-                margin: 0;
-            }
-        }
+        width: 100%;
     }
     &__input:not(:placeholder-shown) ~ &__clear-icon {
         display: inherit;
@@ -50,18 +41,21 @@
         @extend .text_size_xs;
         @extend .text_view_under-text;
     }
-    &_align {
-        &_horisontal {
-            .field__input {
-                display: inline-block;
-                margin: 0 8px;
-            }
+    &_horizontal {
+        .field__input {
+            display: inline-block;
+            margin: 0 8px;
         }
     }
-    &_justify {
-        &_stretch {
-            .field__input {  
-                width: 100%;
+    &_type_number {
+        .field__input {
+            width: 52px;
+            -moz-appearance: textfield;
+            text-align: end;
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
             }
         }
     }

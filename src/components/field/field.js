@@ -1,5 +1,6 @@
 import React from 'react';
 import Icon from '../icon';
+import cn from '../../utils/class-name';
 import './field.scss';
 
 function Field(props) {
@@ -7,7 +8,7 @@ function Field(props) {
     className,
     name,
     label,
-    horizontal,
+    horizontal = false,
     unit,
     cleanable,
     required,
@@ -17,11 +18,12 @@ function Field(props) {
     onChange
   } = props;
   const classes = [
-    'field',
-    horizontal ? 'field_align_horisontal' : 'field_justify_stretch',
+    cn('field')({
+      horizontal,
+      type
+    }),
     className || ''
   ];
-  const inputClass = `field__input field__input_type_${type}`;
   const onClickFn = (value) => {
     switch (type) {
       case 'number':
@@ -40,7 +42,7 @@ function Field(props) {
         <input
           ref={inputRef}
           name={name}
-          className={inputClass}
+          className={cn('field')('input')}
           type={type}
           placeholder={placeholder}
           required={required}
