@@ -18,11 +18,8 @@ class Builder {
       branch = branches[0];
     }
     commit.setBranchName(branch || mainBranch);
-    await BuildDTO.setBuildRequest(commit);
-    // Here we can not to find right build, it will be bag
-    const build = await BuildDTO.getBuildList(0, 20).then(({data}) => {
-      return data.find((build) => build.commitHash === commitHash);
-    });
+    const {id} = await BuildDTO.setBuildRequest(commit);
+    const build = await BuildDTO.getBuildDetails(id);
     Queue.setToQueue(build).then(({object, next}) => {
       Builder.startBuild(object, config).then(() => {
         next();

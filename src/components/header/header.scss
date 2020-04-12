@@ -1,0 +1,20 @@
+@import '../../scss/text.scss';
+
+.header {
+    &__title {
+        align-self: center;
+        @extend .text;
+        @extend .text_size_xl;
+        @extend .text_weight_medium;
+    }
+    &__tools {
+        display: flex;
+        align-self: flex-start;
+        & > * {
+            margin-left: 8px;
+            &:first-child{
+                margin-left: 0;
+            }
+        }
+    }
+}

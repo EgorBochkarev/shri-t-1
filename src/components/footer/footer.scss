@@ -1,0 +1,20 @@
+@import '../../scss/color';
+@import '../../scss/text';
+@import '../../scss/adaptive';
+@import '../../scss/layout';
+
+.footer {
+    background-color: $color-bg-light;
+    &__info {
+        @include layout(12px);
+    }
+}
+
+//for mobile
+//todo fix here
+@media screen and (max-width: $break-point) {
+    .footer .content_align_horisontal {
+        @include layout(8px, column);
+        align-items: flex-start;
+    }
+}

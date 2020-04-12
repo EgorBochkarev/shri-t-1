@@ -1,0 +1,68 @@
+@import '../../scss/color';
+@import '../../scss/text';
+
+.field {
+    position: relative;
+    &__label {
+        @extend .text;
+        @extend .text_size_xs;
+    }
+    &__require-sign {
+        color: $color-require;
+    }
+    &__input {
+        @extend .text;
+        @extend .text_size_xxxs;
+        border: 2px solid $color-bg-heavy;
+        &:focus {
+            border: 2px solid $color-bg-control-focused;
+            outline-offset: none;
+            outline: none;
+        }
+        display: block;
+        margin: 6px 0 0;
+        padding: 0 13px;
+        border-radius: 4px;
+        height: 36px;
+        width: 100%;
+    }
+    &__input:invalid:not(:focus) {
+        border-color: $color-fail;
+    }
+    &__input:not(:placeholder-shown):hover ~ &__clear-icon {
+        display: inherit;
+    }
+    &__input:not(:placeholder-shown) ~ &__clear-icon:hover {
+        display: inherit;
+    }
+    &__clear-icon {
+        fill: $color-text-second;
+        position: absolute;
+        display: none;
+        right: 10px;
+        bottom: 10px;
+    }
+    &__unit {
+        @extend .text;
+        @extend .text_size_xs;
+        @extend .text_view_under-text;
+    }
+    &_horizontal {
+        .field__input {
+            display: inline-block;
+            margin: 0 8px;
+        }
+    }
+    &_type_number {
+        .field__input {
+            width: 52px;
+            -moz-appearance: textfield;
+            text-align: end;
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+        }
+    }
+}

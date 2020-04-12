@@ -1,0 +1,79 @@
+@import '../../scss/color';
+@import '../../scss/text';
+@import '../../scss/adaptive';
+
+.button {
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 4px;
+    height: 28px;
+    background-color: $color-bg-control;
+    &:hover {
+        background-color: $color-bg-control-hovered
+    }
+    &:focus {
+        border: 2px solid $color-bg-control-focused;
+        outline-offset: none;
+        outline: none;
+    }
+    cursor: pointer;
+    &__text {
+        padding: 0 5px;
+        margin: 0 auto;
+        white-space: nowrap;
+        @extend .text;
+        @extend .text_size_xxs;
+    }
+    &_size {
+        &_s {
+            height: 28px;
+            padding: 0px 8px;
+            .button__text {
+                line-height: $size-typo-xxxl;
+            }
+        }
+        &_m {
+            height: 36px;
+            padding: 0px 20px;
+            .button__text {
+                line-height: $size-typo-xxxxl;
+            }
+        }
+    }
+    &_type {
+        &_action {
+            background-color: $color-bg-action;
+            &:hover {
+                background-color: $color-bg-action-hovered;
+            }
+            &:focus {
+                border: 2px solid $color-bg-action-focused;
+            }
+        }
+        &_control {
+            background-color: $color-bg-control;
+            &:hover {
+                background-color: $color-bg-control-hovered
+            }
+        }
+        &_disabled {
+            cursor: default;
+            background-color: $color-bg-disabled;
+            &:hover {
+                background-color: $color-bg-disabled
+            }
+            &:focus {
+                border: none;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $break-point) {
+    .button_adaptive {
+        .button__text {
+            display: none;
+        }
+    }
+}

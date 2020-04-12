@@ -5,17 +5,21 @@
         "node": true
     },
     "extends": [
-        "google"
+        "google",
+        "plugin:react/recommended"
     ],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
     },
     "parserOptions": {
-        "ecmaVersion": 2018
+        "ecmaVersion": 2020,
+        "sourceType": "module"
     },
+    "ignorePatterns": ["dist/", "node_modules/"],
     "rules": {
         "require-jsdoc": ["off"],
-        "comma-dangle": ["off"]
+        "comma-dangle": ["off"],
+        "react/prop-types": ["off"]
     }
 }

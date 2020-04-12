@@ -38,10 +38,15 @@ $size-typo-xxxxl: 36px;
     color: $color-text;
     &_size {
         //title
-        &_l {
+        &_xl {
             font-size: $size-typo-xxl;
             line-height: $size-typo-xxxl;
             letter-spacing: 0.25px;
+        }
+        //pop-up title
+        &_l {
+            font-size: $size-typo-m;
+            line-height: $size-typo-xl;
         }
 
         //task number
@@ -105,17 +110,6 @@ $size-typo-xxxxl: 36px;
         }
     }
 }
-
-// //footer link
-    // &_size_xxs {
-    //     font-size: $size-typo-xxs;
-    //     line-height: $size-typo-s;
-    // }
-    // &_size_xs {
-    //     font-size: $size-typo-xxs;
-    //     line-height: $size-typo-m;
-    //     letter-spacing: 0.06px;
-    // }
 
 //for mobile
 @media screen and (max-width: $break-point) {

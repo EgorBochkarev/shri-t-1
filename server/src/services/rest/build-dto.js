@@ -31,7 +31,8 @@ class BuildDTO extends SecurityService {
     const myURL = new URL('https://hw.shri.yandex/api/build/details');
     // Add some validation
     buildId && myURL.searchParams.append('buildId', buildId);
-    return SecurityService.axiosInstance.get(myURL.toString());
+    return SecurityService.axiosInstance.get(myURL.toString())
+        .then(({data}) => data && data.data);
   }
   // {
   //     "commitMessage": "string",
@@ -40,9 +41,8 @@ class BuildDTO extends SecurityService {
   //     "authorName": "string"
   // }
   static async setBuildRequest(request) {
-    return SecurityService.axiosInstance.post('https://hw.shri.yandex/api/build/request', request).then(({data}) => {
-      return data;
-    });
+    return SecurityService.axiosInstance.post('https://hw.shri.yandex/api/build/request', request)
+        .then(({data}) => data && data.data);
   }
 
 

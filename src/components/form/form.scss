@@ -1,0 +1,41 @@
+@import '../../scss/adaptive';
+@import '../../scss/layout';
+
+.form {
+    max-width: 474px;
+    &__title {
+        margin: 8px 0 22px;
+        @include layout(8px, column);
+    }
+    &__field {
+        margin-top: 18px;
+        &:first-child {
+            margin-top: 0px;
+        }
+        &_small {
+            margin-top: 20px
+        }
+    }
+    &__tools {
+        margin: 24px 0;
+        @include layout(8px);
+    }
+    &_type_small {
+        .form__tools {
+            margin: 12px 0 0;
+        }
+    }
+}
+
+@media screen and (max-width: $break-point) {
+    .form__title {
+        margin: 14px 0;
+    }
+    .form__field_small {
+        margin-top: 16px
+    }
+    .form__tools {
+        margin: 20px 0;
+        @include layout(12px, column);
+    }
+}
