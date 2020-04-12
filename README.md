@@ -36,10 +36,10 @@
 
 ## Info
 
-* Для установки запустите npm i и docker deamon
+* Для установки запустите npm i, docker deamon и в файле ./server/.end введите свой ACCESS_TOKEN
 * Запуск верстки npm srart
-* Запуск сервера ACCESS_TOKEN={your_token} npm run start-server, для запуска необходим докер
-* Запуск всего ACCESS_TOKEN={your_token} npm start
+* Запуск сервера npm run start-server, для запуска необходим докер
+* Запуск всего npm start
 * Запуск тестов npm test
 * Мое задание можно использовать как показательный пример ошибок
 
