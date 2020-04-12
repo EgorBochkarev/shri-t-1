@@ -2,7 +2,7 @@ const SecurityService = require('../oauth2/security-service');
 
 class ConfDTO {
   static async getConf() {
-    return SecurityService.axiosInstance.get(this.url)
+    return SecurityService.axiosInstance.get(this.baseUrl)
         .then(({data}) => data.data || {});
   }
 
@@ -13,13 +13,13 @@ class ConfDTO {
   //     "period": 0
   // }
   static async setConf(conf) {
-    return SecurityService.axiosInstance.post(this.url, conf);
+    return SecurityService.axiosInstance.post(this.baseUrl, conf);
   }
 
   static async deleteConf() {
-    return SecurityService.axiosInstance.delete(this.url);
+    return SecurityService.axiosInstance.delete(this.baseUrl);
   }
 }
-ConfDTO.url = 'https://hw.shri.yandex/api/conf';
+ConfDTO.baseUrl = 'https://hw.shri.yandex/api/conf';
 
 module.exports = ConfDTO;

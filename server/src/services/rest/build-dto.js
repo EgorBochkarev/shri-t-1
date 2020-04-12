@@ -3,7 +3,7 @@ const NodeCache = require( 'node-cache' );
 
 class BuildDTO extends SecurityService {
   static async getBuildList(offset, limit) {
-    const myURL = new URL('https://hw.shri.yandex/api/build/list');
+    const myURL = new URL(`${BuildDTO.baseUrl}/list`);
     // Add some validation
     offset && myURL.searchParams.append('offset', offset);
     limit && myURL.searchParams.append('limit', limit);
@@ -14,7 +14,7 @@ class BuildDTO extends SecurityService {
     if (BuildDTO.logCache.has(buildId)) {
       return BuildDTO.logCache.get(buildId);
     }
-    const myURL = new URL('https://hw.shri.yandex/api/build/log');
+    const myURL = new URL(`${BuildDTO.baseUrl}/log`);
     // Add some validation
     buildId && myURL.searchParams.append('buildId', buildId);
     return SecurityService.axiosInstance.get(myURL.toString())
@@ -28,7 +28,7 @@ class BuildDTO extends SecurityService {
         });
   }
   static async getBuildDetails(buildId) {
-    const myURL = new URL('https://hw.shri.yandex/api/build/details');
+    const myURL = new URL(`${BuildDTO.baseUrl}/details`);
     // Add some validation
     buildId && myURL.searchParams.append('buildId', buildId);
     return SecurityService.axiosInstance.get(myURL.toString())
@@ -41,18 +41,18 @@ class BuildDTO extends SecurityService {
   //     "authorName": "string"
   // }
   static async setBuildRequest(request) {
-    return SecurityService.axiosInstance.post('https://hw.shri.yandex/api/build/request', request)
-        .then(({data}) => data && data.data);
+    return SecurityService.axiosInstance.post(
+        `${BuildDTO.baseUrl}/request`,
+        request
+    ).then(({data}) => data && data.data);
   }
 
 
   static async setBuildStart(buildId) {
-    return SecurityService.axiosInstance.post('https://hw.shri.yandex/api/build/start', {
+    return SecurityService.axiosInstance.post(`${BuildDTO.baseUrl}/start`, {
       buildId: buildId,
       dateTime: new Date().toISOString(),
-    }).then(({data}) => {
-      return data;
-    }).catch((e) => {
+    }).then(({data}) => data).catch((e) => {
       console.log(e);
     });
   }
@@ -63,20 +63,20 @@ class BuildDTO extends SecurityService {
   //     "buildLog": "string"
   // }
   static async setBuildFinish(request) {
-    return SecurityService.axiosInstance.post('https://hw.shri.yandex/api/build/finish', request).then(({data}) => {
-      return data;
-    });
+    return SecurityService.axiosInstance.post(
+        `${BuildDTO.baseUrl}/finish`,
+        request
+    ).then(({data}) => data);
   }
   static async setBuildCancel(buildId) {
-    return SecurityService.axiosInstance.post('https://hw.shri.yandex/api/build/cancel', {
+    return SecurityService.axiosInstance.post(`${BuildDTO.baseUrl}/cancel`, {
       buildId: buildId,
-    }).then(({data}) => {
-      return data;
-    });
+    }).then(({data}) => data);
   }
 }
 BuildDTO.logCache = new NodeCache({
   stdTTL: 3600,
   maxKeys: 200,
 });
+BuildDTO.baseUrl = 'https://hw.shri.yandex/api/build';
 module.exports = BuildDTO;
