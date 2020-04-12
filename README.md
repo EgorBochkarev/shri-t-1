@@ -39,7 +39,19 @@
 * Для установки запустите npm i и docker deamon
 * Запуск верстки npm srart
 * Запуск сервера ACCESS_TOKEN={your_token} npm run start-server, для запуска необходим докер
+* Запуск всего ACCESS_TOKEN={your_token} npm start
+* Запуск тестов npm test
 * Мое задание можно использовать как показательный пример ошибок
+
+## Tests
+
+### Server side tests
+
+#### Module tests
+
+* Task manager
+* Builder
+* Queue
 
 ## Bugs
 

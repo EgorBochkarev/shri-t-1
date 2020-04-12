@@ -6,11 +6,11 @@ const {exec} = require('child_process');
 
 class Builder {
   static async setToQueue(commitHash, branch) {
-    const config = await ConfigDTO.getConf();
+    const config = await Builder.configDTO.getConf();
     const {repoName, mainBranch} = config;
-    const promises = [GitDTO.getCommit(repoName, commitHash)];
+    const promises = [Builder.gitDTO.getCommit(repoName, commitHash)];
     if (!branch) {
-      promises.push(GitDTO.getCommitBranches(repoName, commitHash));
+      promises.push(Builder.gitDTO.getCommitBranches(repoName, commitHash));
     }
     const [commit, branches] = await Promise.all(promises);
     if (branches) {
@@ -18,8 +18,8 @@ class Builder {
       branch = branches[0];
     }
     commit.setBranchName(branch || mainBranch);
-    const {id} = await BuildDTO.setBuildRequest(commit);
-    const build = await BuildDTO.getBuildDetails(id);
+    const {id} = await Builder.buildDTO.setBuildRequest(commit);
+    const build = await Builder.buildDTO.getBuildDetails(id);
     Queue.setToQueue(build).then(({object, next}) => {
       Builder.startBuild(object, config).then(() => {
         next();
@@ -32,10 +32,10 @@ class Builder {
     console.log(`Start build ${build.id}`);
     const [buildResult] = await Promise.all([
       Builder.build(build, config),
-      BuildDTO.setBuildStart(build.id),
+      Builder.buildDTO.setBuildStart(build.id),
     ]);
     console.log(`Finish build ${build.id}`);
-    return BuildDTO.setBuildFinish(buildResult);
+    return Builder.buildDTO.setBuildFinish(buildResult);
   }
 
   static build({id, commitHash}, {repoName, mainBranch, buildCommand}) {
@@ -69,5 +69,9 @@ class Builder {
     });
   }
 }
+
+Builder.gitDTO = GitDTO;
+Builder.configDTO = ConfigDTO;
+Builder.buildDTO = BuildDTO;
 
 module.exports = Builder;
