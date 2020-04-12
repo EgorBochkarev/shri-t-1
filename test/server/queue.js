@@ -5,11 +5,11 @@ const {expect} = require('chai');
 it('Check queue', function(done) {
   // Prepare
   const objectsToPutInQueue = [{
-    exectTime: 100
+    exectTime: 10
   }, {
-    exectTime: 300
+    exectTime: 30
   }, {
-    exectTime: 500
+    exectTime: 50
   }];
 
   const resultOrder = [];

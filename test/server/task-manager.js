@@ -51,7 +51,7 @@ it('Check periodical task', (done) => {
 
   // Action
   TaskManager.start({
-    period: 0.05,
+    period: 0.005,
     repoName: 'Test/test'
   });
 });
