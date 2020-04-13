@@ -1,5 +1,5 @@
-const Builder = require('../../server/src/builder/builder');
-const CommitModel = require('../../server/src/models/commit-model');
+const Builder = require('../../src/builder/builder');
+const CommitModel = require('../../src/models/commit-model');
 const {it} = require('mocha');
 const {expect} = require('chai');
 

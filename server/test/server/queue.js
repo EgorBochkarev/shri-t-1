@@ -1,4 +1,4 @@
-const Queue = require('../../server/src/builder/queue');
+const Queue = require('../../src/builder/queue');
 const {it} = require('mocha');
 const {expect} = require('chai');
 
