@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "mock": "npx concurrently --kill-others \"node ./mock/mock.js\" \"node index.js -s http://localhost:3003\"",
+    "mock": "concurrently --kill-others \"node ./mock/mock.js\" \"node index.js -s http://localhost:3003\"",
     "mock-server": "node ./mock/mock.js",
-    "test": "mocha  --timeout 10000"
+    "test": "mocha  --timeout 10000",
+    "integral-test": "node ./test/integral/server.js"
   },
   "engines": {
     "node": ">=11.13.0"
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "concurrently": "^5.1.0",
     "mocha": "^7.1.1",
     "ramda": "^0.27.0"
   }

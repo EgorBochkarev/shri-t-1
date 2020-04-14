@@ -11,7 +11,9 @@ const startServer = function(port) {
   app.use(express.static(staticPath));
   app.use('/history', express.static(staticPath));
   app.use('/settings', express.static(staticPath));
-
+  app.get('/health', (req, res) => {
+    res.end();
+  });
 
   Api.initSettingsApi(app, baseUrl);
   Api.initBuildsApi(app, baseUrl);
