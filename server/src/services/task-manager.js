@@ -32,6 +32,8 @@ class TaskManager {
       return Promise.all(
           commits.map(getBranch).map((getBranchFn) => getBranchFn())
       );
+    }).catch((e) => {
+      console.error('Can\'t start periodical task');
     });
   }
 }

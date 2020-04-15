@@ -50,6 +50,11 @@ exports.initBuildsApi = (app, baseUrl) => {
   app.post(`${baseUrl}/:commitHash`, (req, res) => {
     Builder.setToQueue(req.params.commitHash).then((build) => {
       res.json(build);
+    }).catch((e) => {
+      res.status(500).json({
+        error: 'BUILD_RUN_ERROR',
+        message: 'Fail to run build',
+      });
     });
   });
 };
