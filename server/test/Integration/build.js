@@ -103,39 +103,47 @@ describe('Build api tests', () => {
       done(e);
     });
   });
-  it('Check offset in builds result', function(done) {
-    RestApi.getBuilds(2, 3).then((builds) => {
-      console.log(builds);
-      expect(builds).to.include.members([{
-        commitHash: '414b46ff6652216a25d41f9b4521639b6c37b5a3',
-        id: 'IDn3',
-        buildNumber: 3},
-      {
+  it('Check offset and limit in builds result', function(done) {
+    RestApi.getBuilds(1, 2).then((builds) => {
+      expect(builds).to.have.lengthOf(2);
+      done();
+    }).catch((e) => {
+      done(e);
+    });
+  });
+  it('Check offset and limit in builds first elemen result', function(done) {
+    RestApi.getBuilds(1, 2).then((builds) => {
+      expect(builds[0]).to.include({
         commitHash: '1933a6940a88d51e8850c8047e14b1df0d3ad386',
-        id: 'IDn4',
-        buildNumber: 4
-      }]);
+        id: 'IDn2',
+        buildNumber: 2
+      });
       done();
     }).catch((e) => {
       done(e);
     });
   });
   it('Check build finished', function(done) {
-    RestApi.getBuild('IDn1').then((build) => {
-      expect(build).to.include({
-        commitHash: '1933a6940a88d51e8850c8047e14b1df0d3ad386',
-        commitMessage: 'last fixed',
-        branchName: 'master',
-        authorName: 'Vlad',
-        id: 'IDn1',
-        configurationId,
-        buildNumber: 1,
-        status: 'InProgress'
-      }).to.have.property('start');
-      done();
-    }).catch((e) => {
-      done(e);
-    });
+    const interval = setInterval(() => {
+      RestApi.getBuild('IDn1').then((build) => {
+        if (build.status !== 'InProgress') {
+          clearInterval(interval);
+          expect(build).to.include({
+            commitHash: '1933a6940a88d51e8850c8047e14b1df0d3ad386',
+            commitMessage: 'last fixed',
+            branchName: 'master',
+            authorName: 'Vlad',
+            id: 'IDn1',
+            configurationId,
+            buildNumber: 1,
+            status: 'Success'
+          }).to.have.all.keys('start', 'duration');
+          done();
+        }
+      }).catch((e) => {
+        done(e);
+      });
+    }, 1000);
   });
 });
 
