@@ -4,6 +4,6 @@ describe('Modul tests', () => {
   require('./server/builder');
 });
 describe('Integration tests', () => {
-  require('./Integration/configuration');
-  require('./Integration/build');
+  require('./integration/configuration');
+  require('./integration/build');
 });

@@ -45,6 +45,13 @@
 
 ## Tests
 
+Before starting test, be sure that your docker daemon is launched and selenium-standalone is listening http://0.0.0.0:4444/wd/hub
+
+To install amd run selenium-standalone:
+
+    npm i selenium-standalone --global
+    selenium-standalone install
+
 ### Server side tests
 
 #### Module tests
@@ -72,6 +79,14 @@ Test rest api and git api integration
     * Starting build api
     * Getting build detail api
     * Getting build log api
+
+
+### Disadvantage of test implementation
+
+* Test are not atomic, and some of them relay on previos tests 
+(To solve it need to restart and prepare mock server every time, that will increase git api requests, and it will be blocked coz there is no authorization. Solution: Make an authorization or mock git api)
+* There are not test of rainy day scenarios
+* sinon.js could be used
 
 ## Bugs
 
