@@ -1,6 +1,5 @@
 const Builder = require('../../src/builder/builder');
 const CommitModel = require('../../src/models/commit-model');
-const {it} = require('mocha');
 const {expect} = require('chai');
 
 const result = {
@@ -11,7 +10,7 @@ const result = {
 };
 
 describe('Builder tests:', () => {
-  before((done) => {
+  beforeEach((done) => {
     Builder.gitDTO = {
       getCommit: () => {
         return new Promise((resolve) => {
@@ -47,6 +46,7 @@ describe('Builder tests:', () => {
         });
       }
     };
+    // Here need to use sinon.js
     Builder.buildDTO = {
       setBuildRequest: (commit) => {
         result.requestedBuild = commit;

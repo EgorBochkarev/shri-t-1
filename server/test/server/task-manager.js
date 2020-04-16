@@ -1,6 +1,5 @@
 const TaskManager = require('../../src/services/task-manager');
 const CommitModel = require('../../src/models/commit-model');
-const {it} = require('mocha');
 const {expect} = require('chai');
 
 it('Check periodical task', (done) => {
