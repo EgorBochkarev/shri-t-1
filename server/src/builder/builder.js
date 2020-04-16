@@ -46,13 +46,13 @@ class Builder {
       let scriptOutput = '';
       child.stdout.setEncoding('utf8');
       child.stdout.on('data', function(data) {
-        data=data.toString();
-        scriptOutput+=data;
+        data = data.toString();
+        scriptOutput += data;
       });
       child.stderr.setEncoding('utf8');
       child.stderr.on('data', function(data) {
-        data=data.toString();
-        scriptOutput+=data;
+        data = data.toString();
+        scriptOutput += data;
       });
       child.on('close', function(code) {
         resolve({

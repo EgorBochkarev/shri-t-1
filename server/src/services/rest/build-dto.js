@@ -19,10 +19,12 @@ class BuildDTO extends SecurityService {
     buildId && myURL.searchParams.append('buildId', buildId);
     return SecurityService.axiosInstance.get(myURL.toString())
         .then(({data}) => {
-          try {
-            BuildDTO.logCache.set(buildId, data);
-          } catch (e) {
-            console.log('Cashe limit was succed');
+          if (data) {
+            try {
+              BuildDTO.logCache.set(buildId, data);
+            } catch (e) {
+              console.log('Cashe limit was succed');
+            }
           }
           return data;
         });
