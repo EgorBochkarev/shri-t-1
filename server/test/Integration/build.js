@@ -145,5 +145,14 @@ describe('Build api tests', () => {
       });
     }, 1000);
   });
+  it('Check build logs', function(done) {
+    RestApi.getBuildLog('IDn1').then((buildLog) => {
+      // eslint-disable-next-line max-len
+      expect(buildLog).to.eql('Cloning into \'build\'...\nHEAD is now at 1933a69 last fixed\nfinish\n');
+      done();
+    }).catch((e) => {
+      done(e);
+    });
+  });
 });
 

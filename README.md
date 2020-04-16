@@ -50,8 +50,28 @@
 #### Module tests
 
 * Task manager
+    * Periodical task check
 * Builder
+    * Set to queue checking
+    * Register build checking
+    * Record build starting time checking
+    * Build result checking
 * Queue
+    * Queue order checking
+
+#### Integration tests
+
+Test rest api and git api integration
+
+* Configuration rest api test
+    * Getting configuration api
+    * Setting configuration api
+    * Deleting configuration api
+* Buid rest api test
+    * Getting list api
+    * Starting build api
+    * Getting build detail api
+    * Getting build log api
 
 ## Bugs
 
