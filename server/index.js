@@ -25,6 +25,8 @@ execFile('docker', ['ps'], (err, out) => {
         if (conf.period) {
           TaskManager.start(conf);
         }
+      }).catch((error) => {
+        console.log('Error to start periodical task');
       });
     }).catch((error) => {
       console.log('Error:', error);

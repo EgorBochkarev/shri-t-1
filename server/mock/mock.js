@@ -85,9 +85,11 @@ app.post(`${baseBuildUrl}/request`, (req, res) => {
 app.post(`${baseBuildUrl}/start`, ({body}, res) => {
   const {buildId, dateTime} = body;
   const build = data.builds.find(({id}) => id === buildId);
-  build.status = 'InProgress';
-  build.start = dateTime;
-  res.end();
+  if (build) {
+    build.status = 'InProgress';
+    build.start = dateTime;
+    res.end();
+  }
 });
 
 app.post(`${baseBuildUrl}/finish`, ({body}, res) => {
@@ -100,3 +102,28 @@ app.post(`${baseBuildUrl}/finish`, ({body}, res) => {
 });
 
 app.listen(3003);
+
+const setConfig = (config) => {
+  data.config = config;
+};
+const getConfig = () => {
+  return data.config;
+};
+const setBuilds = (builds) => {
+  data.builds = builds;
+};
+
+const getBuilds = () => {
+  return data.builds;
+};
+
+module.exports = {
+  clearMock: function() {
+    setConfig({});
+    setBuilds([]);
+  },
+  setConfig,
+  getConfig,
+  setBuilds,
+  getBuilds
+};

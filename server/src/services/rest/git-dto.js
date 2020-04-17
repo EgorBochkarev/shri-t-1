@@ -56,7 +56,7 @@ class GitDTO {
 GitDTO.baseURL = 'https://api.github.com/repos',
 GitDTO.axiosInstance = axios.create({
   headers: {
-    Accept: 'application/vnd.github.cloak-preview',
+    Accept: 'application/vnd.github.cloak-preview'
   },
 });
 

@@ -7,8 +7,8 @@
     "start": "node index.js",
     "mock": "concurrently --kill-others \"node ./mock/mock.js\" \"node index.js -s http://localhost:3003\"",
     "mock-server": "node ./mock/mock.js",
-    "test": "mocha  --timeout 10000",
-    "integral-test": "node ./test/integral/server.js"
+    "start-with-mock": "node index.js -s http://localhost:3003",
+    "test": "mocha --timeout 10000"
   },
   "engines": {
     "node": ">=11.13.0"
@@ -28,6 +28,7 @@
     "chai": "^4.2.0",
     "concurrently": "^5.1.0",
     "mocha": "^7.1.1",
-    "ramda": "^0.27.0"
+    "ramda": "^0.27.0",
+    "sinon": "^9.0.2"
   }
 }

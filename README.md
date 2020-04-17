@@ -83,10 +83,8 @@ Test rest api and git api integration
 
 ### Disadvantage of test implementation
 
-* Test are not atomic, and some of them relay on previos tests 
 (To solve it need to restart and prepare mock server every time, that will increase git api requests, and it will be blocked coz there is no authorization. Solution: Make an authorization or mock git api)
 * There are not test of rainy day scenarios
-* sinon.js could be used
 
 ## Bugs
 

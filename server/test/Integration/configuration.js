@@ -1,6 +1,7 @@
 const RestApi = require('./rest-api');
-const {exec} = require('child_process');
 const {expect} = require('chai');
+const {exec} = require('child_process');
+const {clearMock, setConfig, getConfig} = require('../../mock/mock');
 
 let proc;
 
@@ -10,18 +11,20 @@ const config = {
   'mainBranch': 'master',
   'period': 5
 };
+
 describe('Configuration api tests', () => {
-  before(function(done) {
-    proc = exec('npm run mock');
+  beforeEach(function(done) {
+    proc = exec('npm run start-with-mock');
     const interval = setInterval(() => {
       RestApi.checkHealth().then(() => {
         clearInterval(interval);
         done();
       }).catch((e) => {
       });
-    }, 1000);
+    }, 300);
   });
-  after(function() {
+  afterEach(function() {
+    clearMock();
     proc.kill();
   });
   it('Check empty config return', function(done) {
@@ -40,20 +43,23 @@ describe('Configuration api tests', () => {
       done(e);
     });
   });
-  // Next test is reliable on previos one, it's bad practice;
   it('Check set config', function(done) {
-    RestApi.getConfig().then((settingsGet) => {
-      expect(settingsGet).to.include(config).to.have.property('id');
+    RestApi.setConfig(config).then((settingsSet) => {
+      expect(getConfig()).to.include(settingsSet);
       done();
     }).catch((e) => {
       done(e);
     });
   });
   it('Check deleting config', function(done) {
-    RestApi.deleteConfig().then(() => RestApi.getConfig().then((settings) => {
-      expect(settings).to.be.empty;
+    setConfig({
+      id: 'some',
+      ...config
+    });
+    RestApi.deleteConfig().then(() => {
+      expect(getConfig()).to.be.empty;
       done();
-    })).catch((e) => {
+    }).catch((e) => {
       done(e);
     });
   });
