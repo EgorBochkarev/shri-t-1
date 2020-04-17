@@ -1,5 +1,6 @@
 const express = require('express');
 const {pipe, prop, map, dissoc, slice, propEq, find, pick} = require('ramda');
+
 const app = express();
 app.use(express.json());
 

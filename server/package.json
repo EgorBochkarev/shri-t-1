@@ -8,7 +8,10 @@
     "mock": "concurrently --kill-others \"node ./mock/mock.js\" \"node index.js -s http://localhost:3003\"",
     "mock-server": "node ./mock/mock.js",
     "start-with-mock": "node index.js -s http://localhost:3003",
-    "test": "mocha --timeout 10000"
+    "test": "mocha --timeout 10000",
+    "selenium-start": "selenium-standalone start",
+    "hermione": "hermione test/integration/ui/start-page.js",
+    "hermione-gui": "hermione gui test/integration/ui/start-page.js"
   },
   "engines": {
     "node": ">=11.13.0"
@@ -27,6 +30,8 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "concurrently": "^5.1.0",
+    "hermione": "^3.1.0",
+    "html-reporter": "^5.15.2",
     "mocha": "^7.1.1",
     "ramda": "^0.27.0",
     "sinon": "^9.0.2"
