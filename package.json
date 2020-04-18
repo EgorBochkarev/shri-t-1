@@ -5,7 +5,7 @@
   "main": "./src/index.js",
   "scripts": {
     "dev": "concurrently --kill-others \"npm run start\" \"cd server && npm start\"",
-    "start": "webpack-dev-server && cd server && npm start",
+    "start": "webpack-dev-server",
     "build": "webpack  --env.mode=production",
     "start-server": "npm run build && cd server && npm start",
     "postinstall": "cd server && npm i"

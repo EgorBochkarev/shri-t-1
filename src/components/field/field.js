@@ -52,7 +52,7 @@ function Field(props) {
             pattern.toString().substring(1, pattern.toString().length - 1) :
             null
           }
-          value={value}
+          {...value ? {value} : {}}
           onChange={(e) => {
             onClickFn(e.target.value);
           }}
