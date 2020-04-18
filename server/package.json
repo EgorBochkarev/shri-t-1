@@ -10,8 +10,8 @@
     "start-with-mock": "node index.js -s http://localhost:3003",
     "test": "mocha --timeout 10000",
     "selenium-start": "selenium-standalone start",
-    "hermione": "hermione test/integration/ui/start-page.js",
-    "hermione-gui": "hermione gui test/integration/ui/start-page.js"
+    "hermione": "hermione",
+    "hermione-gui": "hermione gui"
   },
   "engines": {
     "node": ">=11.13.0"

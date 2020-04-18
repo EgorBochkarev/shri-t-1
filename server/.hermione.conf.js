@@ -1,5 +1,10 @@
 module.exports = {
     baseUrl: 'http://localhost:3000',
+    sets: {
+        common: {
+            files: 'test/integration/ui'
+        }
+    },
 
     browsers: {
         chrome: {

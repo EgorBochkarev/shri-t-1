@@ -97,13 +97,14 @@ Test rest api and git api integration
 Scenarios:
 
 * Start page
-    * Empty route without set settings lead to start page
-    * Load page
-    * Check header
-    * Check body
-    * Check footer
-    * Click on settings button in header lead to setting page
-    * Click on main "Open settings" button also lead to setting page
+    1. Empty route without set settings lead to start page
+    2. Load page
+    3. Check header
+    4. Check body
+    5. Check footer
+    6. Click on settings button in header lead to setting page
+    7. Click on main "Open settings" button also lead to setting page
+* Build page
 
 ### Disadvantage of test implementation
 
