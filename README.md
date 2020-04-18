@@ -45,14 +45,25 @@
 
 ## Tests
 
-Before starting test, be sure that your docker daemon is launched and selenium-standalone is listening http://0.0.0.0:4444/wd/hub
+Before starting test, be sure that your docker daemon is launched and selenium-standalone is listening http://0.0.0.0:4444/wd/hub.
+To prolong time of working test, please authorize your git hub account by setting Env property in ./server/.env file
 
-To install amd run selenium-standalone:
+To install and run selenium-standalone:
 
     npm i selenium-standalone --global
     selenium-standalone install
 
-### Server side tests
+To run it
+
+    cd ./server && npm run selenium-start
+
+To tun server side tests
+
+    cd ./server && npm run test
+
+To run ui tests
+
+    cd ./server && npm run hermione
 
 #### Module tests
 
@@ -79,11 +90,23 @@ Test rest api and git api integration
     * Starting build api
     * Getting build detail api
     * Getting build log api
+    * Check build workflow
 
+#### UI tests
+
+Scenarios:
+
+* Start page
+
+    * Load page
+    * Check header
+    * Check body
+    * Check footer
+    * Click on settings button in header lead to setting page
+    * Click on main "Open settings" button also lead to setting page
 
 ### Disadvantage of test implementation
 
-(To solve it need to restart and prepare mock server every time, that will increase git api requests, and it will be blocked coz there is no authorization. Solution: Make an authorization or mock git api)
 * There are not test of rainy day scenarios
 
 ## Bugs
