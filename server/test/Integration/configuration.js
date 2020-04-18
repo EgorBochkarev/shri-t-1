@@ -2,6 +2,7 @@ const RestApi = require('./rest-api');
 const {expect} = require('chai');
 const {exec} = require('child_process');
 const {clearMock, setConfig, getConfig} = require('../../mock/mock');
+const {retryTill} = require('./utils');
 
 let proc;
 
@@ -15,13 +16,13 @@ const config = {
 describe('Configuration api tests', () => {
   beforeEach(function(done) {
     proc = exec('npm run start-with-mock');
-    const interval = setInterval(() => {
+    retryTill((resolve) => {
       RestApi.checkHealth().then(() => {
-        clearInterval(interval);
+        resolve();
         done();
       }).catch((e) => {
       });
-    }, 300);
+    });
   });
   afterEach(function() {
     clearMock();

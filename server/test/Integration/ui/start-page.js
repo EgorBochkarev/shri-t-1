@@ -10,7 +10,7 @@ describe('Test start page', () => {
         RestApi.checkHealth().then(() => {
           clearInterval(interval);
           resolve();
-        }).catch();
+        }).catch((e) => {});
       }, 1000);
     });
   });

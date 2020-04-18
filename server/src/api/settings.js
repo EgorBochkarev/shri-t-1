@@ -8,6 +8,12 @@ exports.initSettingsApi = (app, baseUrl) => {
   app.get(baseUrl, (req, res) => {
     ConfigService.getConf().then((data) => {
       res.json(data);
+    }).catch((e) => {
+      console.log(e);
+      res.status(500).json({
+        error: 'CAN_NOT_GET_SETTINGS',
+        message: 'Can\'t get settings'
+      });
     });
   });
 

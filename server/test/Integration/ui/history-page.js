@@ -1,5 +1,7 @@
 const {exec} = require('child_process');
 const RestApi = require('../rest-api');
+const {retryTill} = require('../utils');
+const {expect} = require('chai');
 
 const historyPageOpened = (browser) => {
   return browser.url('/history').waitForVisible('.list');
@@ -9,20 +11,17 @@ let proc;
 describe('Test history page', () => {
   beforeEach(function() {
     proc = exec('npm run mock');
-    return new Promise((resolve, reject) => {
-      const interval = setInterval(() => {
-        RestApi.checkHealth().then(() => {
-          clearInterval(interval);
-          return RestApi.setConfig({
-            'repoName': 'EgorBochkarev/tire-fitting',
-            'buildCommand': 'echo "finish"',
-            'mainBranch': 'master',
-            'period': 5
-          }).then(() => {
-            resolve();
-          });
-        }).catch();
-      }, 1000);
+    return retryTill((resolve) => {
+      RestApi.checkHealth().then(() => {
+        return RestApi.setConfig({
+          'repoName': 'EgorBochkarev/tire-fitting',
+          'buildCommand': 'echo "finish"',
+          'mainBranch': 'master',
+          'period': 5
+        }).then(() => {
+          resolve();
+        });
+      }).catch((e) => {});
     });
   });
   afterEach(function() {
@@ -79,5 +78,106 @@ describe('Test history page', () => {
         .assertView('details-page', '.page', {
           ignoreElements: ['.card']
         });
+  });
+  it('Check in progress build card', function() {
+    // eslint-disable-next-line no-invalid-this
+    const browser = this.browser;
+    return RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386')
+        .then(() => {
+          return retryTill((resolve) => {
+            RestApi.getBuild('IDn1').then((build) => {
+              if (build.status === 'InProgress') {
+                resolve();
+              }
+            }).catch((e) => {});
+          });
+        }).then(() => {
+          return historyPageOpened(browser)
+              .assertView('history-page__in-progress-card', '.card', {
+                ignoreElements: ['.card__meta .extend-icon__label']
+              });
+        });
+  });
+  it('Check Success build card', function() {
+    // eslint-disable-next-line no-invalid-this
+    const browser = this.browser;
+    return RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386')
+        .then(() => {
+          return retryTill((resolve) => {
+            RestApi.getBuild('IDn1').then((build) => {
+              if (build.status === 'Success') {
+                resolve();
+              }
+            }).catch((e) => {});
+          });
+        }).then(() => {
+          return historyPageOpened(browser)
+              .assertView('history-page__success-card', '.card', {
+                ignoreElements: ['.card__meta .extend-icon__label']
+              });
+        });
+  });
+  it('Check list of card', function() {
+    // eslint-disable-next-line no-invalid-this
+    const browser = this.browser;
+    return Promise.all([
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+    ]).then(() => {
+      return historyPageOpened(browser)
+          .assertView('history-page', '.page', {
+            ignoreElements: ['.card']
+          });
+    });
+  });
+  it('Check list of card load more', function() {
+    // eslint-disable-next-line no-invalid-this
+    const browser = this.browser;
+    return Promise.all([
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+      RestApi.runBuild('1933a6940a88d51e8850c8047e14b1df0d3ad386'),
+    ]).then(() => {
+      return historyPageOpened(browser)
+          .click('.list__button')
+          .elements('.card').then(({value}) => {
+            expect(value.length).to.eql(20);
+          });
+    });
   });
 });
