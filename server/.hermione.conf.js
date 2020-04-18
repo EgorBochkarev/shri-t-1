@@ -6,6 +6,12 @@ module.exports = {
             desiredCapabilities: {
                 browserName: 'chrome'
             }
+        },
+        mobile_chrome: {
+            desiredCapabilities: {
+                browserName: 'chrome'
+            },
+            windowSize: "480x800"
         }
     },
     plugins: {
