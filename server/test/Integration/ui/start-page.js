@@ -25,39 +25,41 @@ describe('Test start page', () => {
   });
   it('Start page shown', function() {
     // eslint-disable-next-line no-invalid-this
-    return this.browser.url('/')
+    return this.browser.url('/start')
         .waitForVisible('.informer')
         .assertView('start-page', '.page');
   });
   it('Header check', function() {
     // eslint-disable-next-line no-invalid-this
-    return this.browser.url('/')
+    return this.browser.url('/start')
         .waitForVisible('.informer')
         .assertView('start-page__header', '.header');
   });
   it('Footer check', function() {
     // eslint-disable-next-line no-invalid-this
-    return this.browser.url('/')
+    return this.browser.url('/start')
         .waitForVisible('.informer')
         .assertView('start-page__footer', '.footer');
   });
   it('Body check', function() {
     // eslint-disable-next-line no-invalid-this
-    return this.browser.url('/')
+    return this.browser.url('/start')
         .waitForVisible('.informer')
         .assertView('start-page__body', '.page__scrolled-container');
   });
   it('Click on header button', function() {
     // eslint-disable-next-line no-invalid-this
-    return this.browser.url('/')
+    return this.browser.url('/start')
         .waitForVisible('.informer')
         .click('.header__tools .button')
         .waitForVisible('.form')
-        .assertView('settings-page', '.page');
+        .assertView('settings-page', '.page', {
+          screenshotDelay: 500
+        });
   });
   it('Click on main button', function() {
     // eslint-disable-next-line no-invalid-this
-    return this.browser.url('/')
+    return this.browser.url('/start')
         .waitForVisible('.informer')
         .click('.informer .button')
         .waitForVisible('.form')

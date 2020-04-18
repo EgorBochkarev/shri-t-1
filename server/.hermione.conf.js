@@ -1,5 +1,7 @@
 module.exports = {
     baseUrl: 'http://localhost:3000',
+    retry: 5,
+    strictTestsOrder: true,
     sets: {
         common: {
             files: 'test/integration/ui'

@@ -47,7 +47,10 @@ const loadBuilds = (offset, limit) => (dispatch, getState) => {
   });
 };
 const loadMoreBuilds = () => (dispatch, getState) => {
-  return restService.getAllBuilds(getState().offset, BUILDS_LIMIT).then((builds) => {
+  return restService.getAllBuilds(
+      getState().offset,
+      BUILDS_LIMIT
+  ).then((builds) => {
     dispatch(setOffset(getState().offset + BUILDS_LIMIT));
     dispatch(setBuilds([...getState().builds, ...builds]));
   });
