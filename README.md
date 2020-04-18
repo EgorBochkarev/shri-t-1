@@ -104,7 +104,26 @@ Scenarios:
     5. Check footer
     6. Click on settings button in header lead to setting page
     7. Click on main "Open settings" button also lead to setting page
-* Build page
+* History page
+    1. Empty route with set settings lead to history page
+    2. Load page
+    3. Check header
+    4. Check list of builds
+    5. Check show more button for list of builds
+    6. Check footer
+    7. Check view of build in success status
+    8. Check view of build in in progress status
+    9. Click on settings button in header lead to setting page
+    10. Open build start pop-up
+    11. Close build start pop-up
+    12. Launch new build
+* Settings page
+    1. Open settings without settings
+    2. Open settings with settings
+    3. Check git hub repository field validation
+    4. Check build command field validation
+    5. Click cancel button
+    6. Check setting saving
 
 ### Disadvantage of test implementation
 
