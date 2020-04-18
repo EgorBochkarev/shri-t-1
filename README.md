@@ -59,7 +59,7 @@ To run it
 
 To tun server side tests
 
-    cd ./server && npm run test
+    cd ./server && npm test
 
 To run ui tests
 
@@ -97,7 +97,7 @@ Test rest api and git api integration
 Scenarios:
 
 * Start page
-
+    * Empty route without set settings lead to start page
     * Load page
     * Check header
     * Check body

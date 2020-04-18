@@ -1,4 +1,3 @@
-const {assert} = require('chai');
 const {exec} = require('child_process');
 const RestApi = require('../rest-api');
 
@@ -18,15 +17,50 @@ describe('Test start page', () => {
   afterEach(function() {
     proc.kill();
   });
+  it('Redirect to start page', function() {
+    // eslint-disable-next-line no-invalid-this
+    return this.browser.url('/')
+        .waitForVisible('.informer')
+        .assertView('start-page', '.page');
+  });
   it('Start page shown', function() {
     // eslint-disable-next-line no-invalid-this
-    return this.browser.url('/start').assertView('start-page', '.page');
+    return this.browser.url('/')
+        .waitForVisible('.informer')
+        .assertView('start-page', '.page');
   });
-  it('Open settings button exist', function() {
+  it('Header check', function() {
     // eslint-disable-next-line no-invalid-this
-    return this.browser.url('/start')
-        .isExisting('.button_type_action').then((exist) => {
-          assert.ok(exist, 'Open settings button exist');
-        });
+    return this.browser.url('/')
+        .waitForVisible('.informer')
+        .assertView('start-page__header', '.header');
+  });
+  it('Footer check', function() {
+    // eslint-disable-next-line no-invalid-this
+    return this.browser.url('/')
+        .waitForVisible('.informer')
+        .assertView('start-page__footer', '.footer');
+  });
+  it('Body check', function() {
+    // eslint-disable-next-line no-invalid-this
+    return this.browser.url('/')
+        .waitForVisible('.informer')
+        .assertView('start-page__body', '.page__scrolled-container');
+  });
+  it('Click on header button', function() {
+    // eslint-disable-next-line no-invalid-this
+    return this.browser.url('/')
+        .waitForVisible('.informer')
+        .click('.header__tools .button')
+        .waitForVisible('.form')
+        .assertView('settings-page', '.page');
+  });
+  it('Click on main button', function() {
+    // eslint-disable-next-line no-invalid-this
+    return this.browser.url('/')
+        .waitForVisible('.informer')
+        .click('.informer .button')
+        .waitForVisible('.form')
+        .assertView('settings-page', '.page');
   });
 });
