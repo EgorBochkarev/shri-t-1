@@ -7,7 +7,7 @@ const app = express();
 
 const startServer = function(port) {
   app.use(express.json());
-  const staticPath = path.resolve(__dirname, '..', '..', 'dist');
+  const staticPath = path.resolve(__dirname, '..', '..', 'build-client', 'dist');
   app.use(express.static(staticPath));
   app.get('/health', (req, res) => {
     res.end();
