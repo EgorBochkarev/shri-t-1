@@ -124,10 +124,19 @@ Scenarios:
     4. Check build command field validation
     5. Click cancel button
     6. Check setting saving
+* Build page
+    1. Check build page
+    2. Check footer
+    3. Check header
+    4. Check settings button
+    5. Check rebuild button
+    6. Check build card
+    7. Check build logs
 
 ### Disadvantage of test implementation
 
 * There are not test of rainy day scenarios
+* I checked some results with page screenshot, but it will be better to check it by selectors or more detailed screenshort, to increase stability of tests
 
 ## Bugs
 
