@@ -14,22 +14,21 @@ const tryWithRetry = (fn, atempt, atemptFailMsg = 'Atempt feil, left: {noAtempt}
 const tryTillTheEnd = (fn, atemptFailMsg = 'Atempt feil') =>
   tryWithRetry(fn, 5, atemptFailMsg).catch(
       (e) => timeoutPromise(6000).then(
-          () => periodicRetry(6000)(fn, atempt, atemptFailMsg)
+          () => periodicRetry(6000)(fn, atemptFailMsg)
       )
   );
 
 const periodicRetry = (period) => (fn, atemptFailMsg) =>
-  fn().catch((e) =>
-    timeoutPromise(6000).then(() =>
-      periodicRetry(period)(fn, atempt, atemptFailMsg)
-    )
-  );
+  fn().catch((e) => {
+    return timeoutPromise(period).then(() =>
+      periodicRetry(period)(fn, atemptFailMsg)
+    );
+  });
 
-const timeoutPromise = (delay) => new Promise((resolve) => {
-  setTimeout(() => {
-    resolve();
-  }, delay);
-});
+const timeoutPromise = (delay) => new Promise(
+    (resolve) => setTimeout(() => resolve(), delay)
+);
 
 exports.tryWithRetry = tryWithRetry;
 exports.tryTillTheEnd = tryTillTheEnd;
+exports.periodicRetry = periodicRetry;

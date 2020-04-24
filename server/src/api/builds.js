@@ -1,6 +1,6 @@
 const path = require('path');
 const BuildDTO = require('../services/rest/build-dto');
-const Builder = require('../builder/builder');
+const AgentManager = require('../services/agent-manager');
 const Convert = require('ansi-to-html');
 const convert = new Convert({
   fg: '#FFF',
@@ -48,7 +48,7 @@ exports.initBuildsApi = (app, baseUrl) => {
   });
 
   app.post(`${baseUrl}/:commitHash`, (req, res) => {
-    Builder.setToQueue(req.params.commitHash).then((build) => {
+    AgentManager.setToQueue(req.params.commitHash).then((build) => {
       res.json(build);
     }).catch((e) => {
       res.status(500).json({

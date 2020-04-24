@@ -35,23 +35,23 @@ execFile('docker', ['ps'], (err, out) => {
     if (gitHubLogin && gitHubPswd) {
       GitDTO.baseURL = `https://${gitHubLogin}:${gitHubPswd}@api.github.com/repos`;
     };
-    if (config.serverHost && config.serverPort) {
-      ServerDTO.baseUrl = option['server-url'] || `http://${config.serverHost}:${config.serverPort}`;
+    if (option['server-url'] || serverURL) {
+      ServerDTO.baseUrl = option['server-url'] || serverURL;
+    } else {
+      ServerDTO.baseUrl = `http://${config.serverHost}:${config.serverPort}`;
     }
-    if (serverURL) {
-      ServerDTO.baseUrl = serverURL;
-    }
-    Server.startServer(port || config.port);
+    Server.startServer(option.port || port || config.port);
     Builder.notifyServer = !option.alone;
     if (!option.alone) {
       tryWithRetry(
           () => ServerDTO.notify(
-              `${host || config.host}:${port || option.port || config.port}`
+              `${host || config.host}:${option.port || port || config.port}`
           ),
           5,
           'Notify server feil, left {noAtempt} attempts'
-      ).then(() => {
-        console.log('Agent ready to build');
+      ).then((id) => {
+        ServerDTO.agentId = id;
+        console.log(`Agent registered (${id}) ready to build`);
       }).catch((e) => {
         console.error(
             // eslint-disable-next-line max-len

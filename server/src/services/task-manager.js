@@ -1,5 +1,5 @@
 const GitDTO = require('../services/rest/git-dto');
-const Builder = require('../builder/builder');
+const AgentManager = require('./agent-manager');
 
 class TaskManager {
   static start({period, repoName}) {
@@ -27,7 +27,7 @@ class TaskManager {
             TaskManager.repoName, commitHash
         );
         console.log(`Set commit (${commitHash} from ${branches[0]}) to queue`);
-        return TaskManager.builder.setToQueue(commitHash, branches[0]);
+        return TaskManager.agentManager.setToQueue(commitHash, branches[0]);
       };
       return Promise.all(
           commits.map(getBranch).map((getBranchFn) => getBranchFn())
@@ -39,6 +39,6 @@ class TaskManager {
 }
 
 TaskManager.gitDTO = GitDTO;
-TaskManager.builder = Builder;
+TaskManager.agentManager = AgentManager;
 
 module.exports = TaskManager;
