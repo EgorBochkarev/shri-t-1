@@ -2,6 +2,9 @@
   "name": "ci-builder",
   "description": "Apps for running builds",
   "version": "1.0.0",
+  "scripts": {
+    "build": "cd client && npm ci && npm run build"
+  },
   "devDependencies": {
     "@ljharb/eslint-config": "^16.0.0",
     "eslint": "^6.8.0",

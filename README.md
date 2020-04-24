@@ -1,52 +1,18 @@
-## Task
-### Правильное использование БЭМ-сущностей
-
-* какие части макета являются одним и тем же блоком?
-* какие стили относятся к блокам, а какие к элементам и модификаторам?
-* где нужно использовать каскады и почему?
-
-### Консистентность
-
-* какие видите базовые и семантические константы?
-* какие видите закономерности в интерфейсе?
-
-### Адаптивность
-
-* где видите вариативность данных и как это обрабатываете?
-* какие видите особенности, связанные с размером экрана?
-* что еще повлияло на вашу вёрстку?
-
-## Solution
-
-### БЭМ-сущности
-
-* Кнопки, иконки, хэдер, футер, стиль цвета, инпуты, карточка коммита, иконка с текстом, блок с логом
-* К элементам в основном цвета (Иконки), исключения в отображении (Высота строчки в кнопке), расположение внутри родителя.
-* В карточке коммита
-
-### База
-
-* Цвета (шрифтов иконок и статусов), паддинги, отступы
-
-### Адапривность
-
-* Меняется направление расположения объектов, исчезают лэйблы кнопок, кнопки расширяются на весь экран, меняются размеры шрифтов
-* Есть максимальный размер экрана
-
+# CI Builder
 
 ## Info
 
-* Для установки запустите npm i, docker deamon и в файле ./server/.end введите свой ACCESS_TOKEN
-* Запуск верстки npm srart
-* Запуск сервера npm run start-server, для запуска необходим докер
-* Запуск всего npm start
-* Запуск тестов npm test
+* Для установки запустите `npm i`, docker deamon, в файле `./server/.env` введите свой `ACCESS_TOKEN`
+* Приложение использует [GitHub REST API v3](https://developer.github.com/v3/), для полноценной работы, в файлах `./server/.env` и `./agent/.env` заполните крэдами переменные `GIT_HUB_LOGIN` и `GIT_HUB_PSWD`
+* Перед запуском сервера соберите UI командой `npm run build`;
+* Запуск тестов `npm test` (Out of date)
+* Запуск сервера и агентов: `cd $dir && npm ci && npm start`, где `$dir` это `server` или `agent`
 * Мое задание можно использовать как показательный пример ошибок
 
-## Tests
+## Tests (Out of date)
 
-Before starting test, be sure that your docker daemon is launched and selenium-standalone is listening http://0.0.0.0:4444/wd/hub.
-To prolong time of working test, please authorize your git hub account by setting Env property in ./server/.env file
+Before starting test, be sure that your docker daemon is launched and selenium-standalone is listening `http://0.0.0.0:4444/wd/hub`.
+To prolong time of working test, please authorize your git hub account by setting Env property in `./server/.env` file
 
 To install and run selenium-standalone:
 
@@ -65,7 +31,7 @@ To run ui tests
 
     cd ./server && npm run hermione
 
-#### Module tests
+### Module tests
 
 * Task manager
     * Periodical task check
@@ -77,7 +43,7 @@ To run ui tests
 * Queue
     * Queue order checking
 
-#### Integration tests
+### Integration tests
 
 Test rest api and git api integration
 
@@ -92,7 +58,7 @@ Test rest api and git api integration
     * Getting build log api
     * Check build workflow
 
-#### UI tests
+### UI tests
 
 Scenarios:
 
@@ -132,21 +98,6 @@ Scenarios:
     5. Check rebuild button
     6. Check build card
     7. Check build logs
-
-### Disadvantage of test implementation
-
-* There are not test of rainy day scenarios
-* I checked some results with page screenshot, but it will be better to check it by selectors or more detailed screenshort, to increase stability of tests
-
-## Bugs
-
-* Не правильный цвет плэйсхолдеров
-* Не обработал большое название для названий веток
-* Не обработал большое название для текста в кнопках
-* Слишком много миксов и модификаторов для одного блока
-* Модификатор элемента (Текст кнопки адаптив)
-* Ресет стилей на тэгах - может было бы лучше использовать блоки убирающие эти стили
-* Нет связей для отступов (Не доделал)
 
 ## Links
 [Figma](https://www.figma.com/file/vA6BJJ3AiWar3Q3bq30eyG/SHRI-homework-specification)
