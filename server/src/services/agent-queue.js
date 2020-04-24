@@ -2,6 +2,7 @@ const JSQueue = require('js-queue');
 
 class AgentQueue {
   static async setAgentToQueue(id) {
+    AgentQueue.agentQueue.stop = AgentQueue.agentQueue.contents.length === 0;
     AgentQueue.agentQueue.add(() => AgentQueue.emit(id));
     if (
       AgentQueue.agentQueue.contents.length === 1 &&
@@ -9,6 +10,7 @@ class AgentQueue {
     ) {
       AgentQueue.agentQueue.next();
     }
+    AgentQueue.agentQueue.stop = false;
   }
 
   static async getAvailableAgent() {
