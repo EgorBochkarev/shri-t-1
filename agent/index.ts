@@ -1,12 +1,13 @@
-const Server = require('./src/server');
-const GitDTO = require('../server/src/services/rest/git-dto');
-const ServerDTO = require('./src/services/rest/server-dto');
-const Builder = require('./src/builder/builder');
-const {tryWithRetry} = require('./src/services/retry');
-const {execFile} = require('child_process');
-require('dotenv').config();
-const defaultConfig = require('./agent-conf.json');
-const commandLineArgs = require('command-line-args');
+import Server from './src/server';
+import ServerDTO from './src/services/rest/server-dto';
+import Builder from './src/builder/builder';
+import {tryWithRetry} from './src/services/retry';
+import {execFile} from 'child_process';
+import {config as readEnv} from 'dotenv';
+import defaultConfig from './agent-conf.json';
+import commandLineArgs from 'command-line-args';
+
+readEnv();
 
 const option = commandLineArgs([
   {name: 'port', alias: 'p', type: Number},
@@ -15,8 +16,6 @@ const option = commandLineArgs([
 ]);
 
 const {
-  GIT_HUB_LOGIN: gitHubLogin,
-  GIT_HUB_PSWD: gitHubPswd,
   PORT: port,
   HOST: host,
   SERVER_URL: serverURL
@@ -32,9 +31,6 @@ execFile('docker', ['ps'], (err, out) => {
   if (err) {
     console.error('Please instal and run docker deamon');
   } else {
-    if (gitHubLogin && gitHubPswd) {
-      GitDTO.baseURL = `https://${gitHubLogin}:${gitHubPswd}@api.github.com/repos`;
-    };
     if (option['server-url'] || serverURL) {
       ServerDTO.baseUrl = option['server-url'] || serverURL;
     } else {

@@ -1,9 +1,10 @@
-const ServerDTO = require('../services/rest/server-dto');
-const {tryTillTheEnd} = require('../services/retry');
-const {exec} = require('child_process');
+import ServerDTO from '../services/rest/server-dto';
+import {tryTillTheEnd} from '../services/retry';
+import {exec} from 'child_process';
 
 class Builder {
-  static build(id, commitHash, repoName, buildCommand) {
+  static notifyServer = true
+  static build(id:string, commitHash:string, repoName:string, buildCommand:string) {
     const startDate = Date.now();
     return new Promise((resolve) => {
       const command = `docker container run --rm node /bin/bash -c "git clone https://github.com/${repoName}.git build && cd build && git reset ${commitHash} --hard && ${buildCommand}"`;
@@ -11,12 +12,12 @@ class Builder {
       console.log(`[${new Date().toISOString()}][STDOUT] Start build`);
       resolve();
       let scriptOutput = '';
-      child.stdout.on('data', function(data) {
+      child.stdout && child.stdout.on('data', function(data) {
         data = data.toString();
         process.stdout.write(`[${new Date().toISOString()}][STDOUT] ${data}`);
         scriptOutput += data;
       });
-      child.stderr.on('data', function(data) {
+      child.stderr && child.stderr.on('data', function(data) {
         data = data.toString();
         process.stdout.write(`[${new Date().toISOString()}][STDERR] ${data}`);
         scriptOutput += data;
@@ -41,6 +42,4 @@ class Builder {
   }
 }
 
-Builder.notifyServer = true;
-
-module.exports = Builder;
+export default Builder;
