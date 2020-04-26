@@ -1,11 +1,18 @@
-const JSQueue = require('js-queue');
+import JSQueue from 'js-queue';
 
-class Queue {
+interface QueueResult<T> {
+  next():void,
+  object:T
+}
+
+
+class Queue<T> {
+  queue: JSQueue;
   constructor() {
     this.queue = new JSQueue();
   }
 
-  setToQueue(object) {
+  setToQueue(object:T): Promise<QueueResult<T>> {
     return new Promise((resolve) => {
       const makeRequest = () => {
         resolve({
@@ -20,4 +27,4 @@ class Queue {
   }
 }
 
-module.exports = Queue;
+export default Queue;

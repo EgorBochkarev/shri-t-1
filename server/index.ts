@@ -1,12 +1,14 @@
-const Server = require('./src/server');
-const SecurityService = require('./src/services/oauth2/security-service');
-const ConfigService = require('./src/services/rest/conf-dto');
-const BuildDTO = require('./src/services/rest/build-dto');
-const GitDTO = require('./src/services/rest/git-dto');
-const TaskManager = require('./src/services/task-manager');
-const {execFile} = require('child_process');
-require('dotenv').config();
-const commandLineArgs = require('command-line-args');
+import Server from './src/server';
+import SecurityService from './src/services/oauth2/security-service';
+import ConfigService from './src/services/rest/conf-dto';
+import BuildDTO from './src/services/rest/build-dto';
+import GitDTO from './src/services/rest/git-dto';
+import TaskManager from './src/services/task-manager';
+import {execFile} from 'child_process';
+import {config as readEnv} from 'dotenv';
+import commandLineArgs from 'command-line-args';
+
+readEnv();
 
 const options = commandLineArgs([
   {name: 'shri', alias: 's', type: String}
@@ -26,7 +28,7 @@ execFile('docker', ['ps'], (err, out) => {
       }
       Server.startServer(3000);
       ConfigService.getConf().then((conf) => {
-        if (conf.period) {
+        if (conf) {
           TaskManager.start(conf);
         }
       }).catch((error) => {

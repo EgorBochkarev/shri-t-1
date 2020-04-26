@@ -1,11 +1,11 @@
-const Api = require('./api');
-const path = require('path');
-const express = require('express');
+import Api from './api';
+import path from 'path';
+import express from 'express';
 
 const baseUrl = '/api';
 const app = express();
 
-const startServer = function(port) {
+const startServer = function(port:number):void {
   app.use(express.json());
   const staticPath = path.resolve(
       __dirname, '..', '..', 'client', 'dist'
@@ -26,4 +26,4 @@ const startServer = function(port) {
   app.listen(port);
 };
 
-exports.startServer = startServer;
+export default {startServer}

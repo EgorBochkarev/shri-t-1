@@ -2,9 +2,16 @@ import ServerDTO from '../services/rest/server-dto';
 import {tryTillTheEnd} from '../services/retry';
 import {exec} from 'child_process';
 
+export type BuildRequest = {
+  id:string
+  commitHash:string
+  repoName:string
+  buildCommand:string
+}
+
 class Builder {
   static notifyServer = true
-  static build(id:string, commitHash:string, repoName:string, buildCommand:string) {
+  static build({id, commitHash, repoName, buildCommand}:BuildRequest) {
     const startDate = Date.now();
     return new Promise((resolve) => {
       const command = `docker container run --rm node /bin/bash -c "git clone https://github.com/${repoName}.git build && cd build && git reset ${commitHash} --hard && ${buildCommand}"`;

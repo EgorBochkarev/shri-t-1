@@ -4,4 +4,4 @@ class TokenService {
   }
 }
 
-module.exports = TokenService;
+export default TokenService;

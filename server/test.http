@@ -24,11 +24,11 @@ GET http://localhost:3000/api/builds?offset=0&limit=20
 
 
 ### Get build info
-GET http://localhost:3000/api/builds/7b81d328-d30f-42e4-b00f-21537359cc44
+GET http://localhost:3000/api/builds/IDn1
 
 
 ### Get build logs
-GET http://localhost:3000/api/builds/7b81d328-d30f-42e4-b00f-21537359cc44/logs
+GET http://localhost:3000/api/builds/IDn1/logs
 
 ### Get build logs
 GET http://localhost:3000/api/builds/7b81d328-d30f-42e4-b00f-21537359cc44/logs/html

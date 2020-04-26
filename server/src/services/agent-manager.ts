@@ -1,20 +1,27 @@
-const ConfigDTO = require('./rest/conf-dto');
-const GitDTO = require('./rest/git-dto');
-const BuildDTO = require('./rest/build-dto');
-const AgentDTO = require('./rest/agent-dto');
+import ConfigDTO from './rest/conf-dto';
+import GitDTO from './rest/git-dto';
+import BuildDTO from './rest/build-dto';
+import AgentDTO from './rest/agent-dto';
 const {periodicRetry} = require('../../../agent/src/services/retry');
-const AgentQueue = require('./agent-queue');
-const Queue = require('./queue');
+import AgentQueue from './agent-queue';
+import Queue from './queue';
+import CommitModel from '../models/commit-model';
 
 class AgentManager {
-  static async setToQueue(commitHash, branch) {
+  static buildQueue = new Queue();
+  static agents = new Map<string, AgentDTO>();
+  static async setToQueue(commitHash:string, branch?:string) {
     const config = await ConfigDTO.getConf();
-    const {repoName, mainBranch, buildCommand} = config;
-    const promises = [GitDTO.getCommit(repoName, commitHash)];
-    if (!branch) {
-      promises.push(GitDTO.getCommitBranches(repoName, commitHash));
+    if (!config) {
+      throw Error();
     }
-    const [commit, branches] = await Promise.all(promises);
+    const {repoName, mainBranch, buildCommand} = config;
+    const commits = GitDTO.getCommit(repoName, commitHash);
+    let branchPromise;
+    if (!branch) {
+      branchPromise = GitDTO.getCommitBranches(repoName, commitHash);
+    }
+    const [commit, branches] = await Promise.all([commits, branchPromise]);
     if (branches) {
       // get first bransh where this commit is HEAD
       branch = branches[0];
@@ -26,10 +33,15 @@ class AgentManager {
       return periodicRetry(50)(
           () => AgentQueue.getAvailableAgent()
               .then((agentId) => AgentManager.agents.get(agentId))
-              .then((agent) => Promise.all([
-                agent.build(id, commitHash, repoName, buildCommand),
-                BuildDTO.setBuildStart(id)
-              ]))
+              .then((agent) => {
+                if (!agent){
+                  throw Error();
+                }
+                return Promise.all([
+                  agent.build(id, commitHash, repoName, buildCommand),
+                  BuildDTO.setBuildStart(id)
+                ])
+              })
               .then(() => next()),
           'Try to build next on agent'
       );
@@ -37,7 +49,7 @@ class AgentManager {
     return build;
   }
 
-  static registerAgentToQueue(url) {
+  static registerAgentToQueue(url:string):string {
     for (const [id, agent] of AgentManager.agents.entries()) {
       if (agent.baseURL === url) {
         AgentQueue.setAgentToQueue(id);
@@ -52,12 +64,9 @@ class AgentManager {
     return id;
   }
 
-  static getId() {
+  static getId(): string {
     return Math.random().toString(36).substr(2, 9);
   }
 }
 
-AgentManager.buildQueue = new Queue();
-AgentManager.agents = new Map();
-
-module.exports = AgentManager;
+export default AgentManager;

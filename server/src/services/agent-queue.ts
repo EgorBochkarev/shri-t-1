@@ -1,12 +1,14 @@
-const JSQueue = require('js-queue');
+import JSQueue from 'js-queue';
 
 class AgentQueue {
-  static async setAgentToQueue(id) {
+  static agentQueue = new JSQueue();
+  static agentAddEvent:((id:string)=>void)[] = [];
+  static async setAgentToQueue(id:string) {
     AgentQueue.agentQueue.stop = AgentQueue.agentQueue.contents.length === 0;
     AgentQueue.agentQueue.add(() => AgentQueue.emit(id));
     if (
       AgentQueue.agentQueue.contents.length === 1 &&
-      AgentQueue.agentAddEvent > 0
+      AgentQueue.agentAddEvent.length > 0
     ) {
       AgentQueue.agentQueue.next();
     }
@@ -14,7 +16,7 @@ class AgentQueue {
   }
 
   static async getAvailableAgent() {
-    return new Promise((resolve) => {
+    return new Promise<string>((resolve) => {
       AgentQueue.subscribe((id) => {
         resolve(id);
       });
@@ -22,17 +24,14 @@ class AgentQueue {
     });
   }
 
-  static async subscribe(fn) {
+  static async subscribe(fn:(id:string)=>void) {
     AgentQueue.agentAddEvent.push(fn);
   }
 
-  static async emit(id) {
+  static async emit(id:string) {
     AgentQueue.agentAddEvent.forEach((fn) => fn(id));
     AgentQueue.agentAddEvent = [];
   }
 }
 
-AgentQueue.agentQueue = new JSQueue();
-AgentQueue.agentAddEvent = [];
-
-module.exports = AgentQueue;
+export default AgentQueue;
