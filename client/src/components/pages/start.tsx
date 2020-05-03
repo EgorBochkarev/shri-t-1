@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import Header from '../header';
 import Informer from '../informer';
 
-function Start() {
+const Start:React.FC<object> = () => {
   return (
     <>
       <Header>

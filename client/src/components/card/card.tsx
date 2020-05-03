@@ -4,16 +4,24 @@ import ExtendIcon from '../extend-icon';
 import cn from '../../utils/class-name';
 import {formatISODate, countDuration} from '../../utils/date-formatter';
 import './card.scss';
+import { Build } from '../../../../server/src/services/rest/build-dto';
 
-const StatusMap = {
+const StatusMap = new Map(Object.entries({
   waiting: 'panding',
   inprogress: 'panding',
   success: 'done',
   fail: 'fail',
   canceled: 'fail'
-};
+}));
 
-function Card({className, clickable, view, data}) {
+export interface CardProps {
+  className?:string
+  clickable?:boolean
+  view?:string
+  data:Build
+}
+
+const Card:React.FC<CardProps> = ({className, clickable, view, data}) => {
   const {
     buildNumber, commitMessage, commitHash,
     branchName, authorName, status, start, duration
@@ -21,7 +29,7 @@ function Card({className, clickable, view, data}) {
   const classes = [
     cn('card')({
       view,
-      type: StatusMap[status.toLowerCase()] || 'panding',
+      type: StatusMap.get(status.toLowerCase()) || 'panding',
       clickable
     }),
     className || ''

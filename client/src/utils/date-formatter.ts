@@ -1,12 +1,10 @@
 import {format, formatDistanceStrict, sub} from 'date-fns';
 import {ru} from 'date-fns/locale';
 
-const formatISODate = (timeISO) => {
-  return timeISO ?
-    format(new Date(timeISO), 'd LLL HH:mm', {locale: ru}) :
-    timeISO;
+const formatISODate = (timeISO?:string) => {
+  return timeISO && format(new Date(timeISO), 'd LLL HH:mm', {locale: ru})
 };
-const countDuration = (durationInMiliseconds) => {
+const countDuration = (durationInMiliseconds?:string) => {
   if (!durationInMiliseconds) {
     return durationInMiliseconds;
   }

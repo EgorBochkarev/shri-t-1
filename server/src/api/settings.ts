@@ -8,13 +8,15 @@ export type ApiResult<T> = {
   message:string
 } | T
 
+export type EmptyObject = {}
+
 
 const initSettingsApi = (app:Express, baseUrl:string):void => {
   baseUrl = path.join(baseUrl, 'settings');
 
-  app.get<{},ApiResult<Configuration>>(baseUrl, (req, res) => {
+  app.get<{},ApiResult<Configuration> | EmptyObject>(baseUrl, (req, res) => {
     ConfigService.getConf().then((data) => {
-      res.json(data);
+      res.json(data ? data : {});
     }).catch((e) => {
       console.log(e);
       res.status(500).json({

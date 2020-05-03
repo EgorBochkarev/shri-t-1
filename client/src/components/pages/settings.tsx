@@ -8,8 +8,18 @@ import {
 
 import Form from '../form/form';
 import Header from '../header';
+import { Configuration } from '../../../../server/src/services/rest/conf-dto';
+import { Store } from '../../reducer';
 
-function Settings({settings, onMount, onSubmit, onCancel}) {
+export interface SettingsPageProps {
+  settings?: Configuration
+  onMount():void
+  onSubmit(settings:Configuration):void
+  onCancel():void
+
+}
+
+const Settings:React.FC<SettingsPageProps> = ({settings, onMount, onSubmit, onCancel}) => {
   useEffect(() => {
     onMount();
   }, []);
@@ -56,7 +66,7 @@ function Settings({settings, onMount, onSubmit, onCancel}) {
   );
 }
 
-const mapStateToProps = ({settings}) => {
+const mapStateToProps = ({settings}:Store) => {
   return {
     settings
   };

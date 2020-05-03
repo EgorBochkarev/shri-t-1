@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import {connect} from 'react-redux';
 
 import {loadInitialPageData, loadMoreBuilds, startBuild} from '../../actions';
@@ -10,8 +10,10 @@ import Header from '../header';
 import Button from '../button';
 import PopUp from '../pop-up';
 import Form from '../form/form';
+import { Store } from '../../reducer';
+import { Build } from '../../../../server/src/services/rest/build-dto';
 
-function renderItem(build) {
+const renderItem = (build:Build) => {
   return (
     <Link key={build.id} to={`/build/${build.id}`}>
       <Card data={build} clickable></Card>
@@ -19,16 +21,34 @@ function renderItem(build) {
   );
 }
 
-function History({builds = [], title, onMount, showMore, startBuild}) {
+export interface HistoryPageProps {
+  builds?: Build[]
+  title: string
+  onChange?(value:string, name:string):void
+  onMount():void
+  showMore():void
+  startBuild(hash:string):void
+}
+
+type StartBuildData = {
+  hash: string
+}
+
+const History:React.FC<HistoryPageProps> = ({builds = [], title, onMount, showMore, startBuild}) => {
   useEffect(() => {
     onMount();
   }, []);
   const [showPopUp, setShowPopUp] = useState(false);
-
+  const showRunBuildWindow = useCallback(
+      () => setShowPopUp(true),
+      [setShowPopUp]
+  );
   return (
     <>
       <Header title={title}>
-        <Button size="s" icon="play" adaptive onClick={() => setShowPopUp(true)}>Run build</Button>
+        <Button size="s" icon="play" adaptive onClick={showRunBuildWindow}>
+          Run build
+        </Button>
         <Link to="/settings">
           <Button size="s" icon="settings"></Button>
         </Link>
@@ -43,23 +63,25 @@ function History({builds = [], title, onMount, showMore, startBuild}) {
         </Content>
       </div>
       <PopUp show={showPopUp} title="New build">
-        <Form type="small" metaData={
-          [{
-            label: 'Enter the commit hash whitch you want to build',
-            name: 'hash',
-            placeholder: 'Commit hash',
-            cleanable: true
-          }]
-        }
-        onSubmit={({hash}) => startBuild(hash)}
-        onCancel={() => setShowPopUp(false)}
+        <Form type="small"
+          metaData={
+            [{
+              label: 'Enter the commit hash whitch you want to build',
+              name: 'hash',
+              placeholder: 'Commit hash',
+              cleanable: true
+            }]
+          }
+          data={{} as StartBuildData}
+          onSubmit={({hash}) => startBuild(hash)}
+          onCancel={() => setShowPopUp(false)}
         />
       </PopUp>
     </>
   );
 }
 
-const mapStateToProps = ({builds, settings}) => {
+const mapStateToProps = ({builds, settings}:Store) => {
   return {
     builds,
     title: settings && settings.repoName || ''

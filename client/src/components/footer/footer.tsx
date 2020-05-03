@@ -1,8 +1,12 @@
 import React from 'react';
 import './footer.scss';
 
+export interface FooterProps {
 
-function Footer() {
+}
+
+
+const Footer:React.FC<FooterProps> = () => {
   return (
     <footer className="footer">
       <div className="content content_align_horisontal">

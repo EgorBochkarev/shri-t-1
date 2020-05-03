@@ -1,8 +1,14 @@
 import React from 'react';
 import './extend-icon.scss';
 
-function ExtendIcon({icon, label, subLabel, children}) {
-  label = label || children;
+export interface ExtendIconProps {
+  icon:string
+  label?:string
+  subLabel?:string
+}
+
+const ExtendIcon:React.FC<ExtendIconProps> = ({icon, label, subLabel, children}) => {
+  label = label || children?.toString();
   return (
     <div className="extend-icon">
       <svg className="icon icon_size_l extend-icon__icon">

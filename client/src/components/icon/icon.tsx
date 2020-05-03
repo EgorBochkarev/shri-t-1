@@ -1,7 +1,15 @@
 import React from 'react';
 import './icon.scss';
+import className from '../../utils/class-name';
 
-function Icon({icon, className, size, ...props}) {
+export interface IconProps {
+  icon:string
+  className?:string
+  size?:'l'|'xl'|'xxl'
+  onClick?():void
+}
+
+const Icon:React.FC<IconProps> = ({icon, className, size, ...props}) => {
   const classes = [
     'icon',
     size ? `icon_size_${size}` : '',

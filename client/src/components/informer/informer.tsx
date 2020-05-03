@@ -2,8 +2,14 @@ import React from 'react';
 import Icon from '../icon';
 import './informer.scss';
 
+export interface HeaderProps {
+  icon:string
+  text:string
+  className:string
+}
 
-function Informer({icon, text, className, children}) {
+
+const Informer:React.FC<HeaderProps> = ({icon, text, className, children}) => {
   const classes = [
     'informer',
     className || ''

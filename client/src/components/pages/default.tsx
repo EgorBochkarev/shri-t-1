@@ -4,8 +4,15 @@ import {connect} from 'react-redux';
 
 import {loadInitialPageData} from '../../actions';
 import {Redirect} from 'react-router-dom';
+import { Store } from '../../reducer';
 
-function Default({onMount, startPage, loaded}) {
+interface DefaultPageProps {
+  onMount():void;
+  startPage:boolean;
+  loaded:boolean;
+}
+
+const Default:React.FC<DefaultPageProps> = ({onMount, startPage, loaded}) => {
   useEffect(() => {
     onMount();
   }, []);
@@ -18,9 +25,9 @@ function Default({onMount, startPage, loaded}) {
   return <div>Loading...</div>;
 }
 
-const mapStateToProps = ({settings}) => {
+const mapStateToProps = ({settings}:Store) => {
   return {
-    startPage: settings && settings.id,
+    startPage: Boolean(settings && settings.id),
     loaded: !!settings
   };
 };

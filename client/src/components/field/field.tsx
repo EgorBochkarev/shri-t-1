@@ -1,9 +1,24 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import Icon from '../icon';
 import cn from '../../utils/class-name';
 import './field.scss';
 
-function Field(props) {
+export interface FieldProps {
+  className?:string
+  name:string
+  label?:string
+  horizontal?:boolean,
+  unit?:string,
+  cleanable?:boolean
+  required?:boolean
+  placeholder?:string
+  value?:string
+  pattern?:RegExp
+  type?:string,
+  onChange?(value:string, name:string):void
+}
+
+const Field:React.FC<FieldProps> = (props) => {
   const {
     className,
     name,
@@ -25,7 +40,7 @@ function Field(props) {
     }),
     className || ''
   ];
-  const onClickFn = (value) => {
+  const onClickFn = useCallback((value) => {
     switch (type) {
       case 'number':
         value = Number.parseFloat(value);
@@ -34,8 +49,14 @@ function Field(props) {
         value = value;
     }
     onChange && onChange(value, name);
-  };
-  const inputRef = React.createRef();
+  },[onChange]);
+  const inputRef = React.createRef<HTMLInputElement>();
+  const onClear = useCallback(() => {
+    if (inputRef && inputRef.current) {
+      inputRef.current.value = ''
+    }
+    onClickFn('');
+  },[onChange]);
   return (
     <div className={classes.join(' ')}>
       <label className="field__label">{label}
@@ -50,7 +71,7 @@ function Field(props) {
           pattern={
             pattern ?
             pattern.toString().substring(1, pattern.toString().length - 1) :
-            null
+            undefined
           }
           {...value ? {value} : {}}
           onChange={(e) => {
@@ -63,10 +84,7 @@ function Field(props) {
             icon="clear"
             size="l"
             className="field__clear-icon"
-            onClick={() => {
-              inputRef.current.value = '';
-              onClickFn('');
-            }}
+            onClick={onClear}
           />
         }
         { unit ? <span className="field__unit">{unit}</span> : null }

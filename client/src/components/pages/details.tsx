@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useCallback} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
@@ -9,17 +9,32 @@ import Button from '../button';
 import Header from '../header';
 import CodePresentor from '../code-presenter/code-presenter';
 import Content from '../content';
+import { Store } from '../../reducer';
+import { Build } from '../../../../server/src/services/rest/build-dto';
+import { ButtonTypes } from '../button/button';
 
-function Details({build, log, onMount, headerButtonType = 'disabled', rebuild}) {
+export interface DetailsPageProps {
+  onMount():void;
+  build?:Build;
+  log?:string;
+  headerButtonType:ButtonTypes;
+  rebuild(commitHash:string):void;
+}
+
+const Details:React.FC<DetailsPageProps> = ({build, log, onMount, headerButtonType = 'disabled', rebuild}) => {
   useEffect(() => {
     onMount();
   }, []);
+  if (!build) {
+    return <div></div>
+  }
+  const onRebuild = useCallback(() => {
+    rebuild(build.commitHash);
+  }, [rebuild])
   return (
     <>
       <Header>
-        <Button size="s" icon="rebuild" type={headerButtonType} onClick={() => {
-          rebuild(build.commitHash);
-        }} adaptive>Rebuild</Button>
+        <Button size="s" icon="rebuild" type={headerButtonType} onClick={onRebuild} adaptive>Rebuild</Button>
         <Link to="/settings">
           <Button size="s" icon="settings"></Button>
         </Link>
@@ -35,11 +50,11 @@ function Details({build, log, onMount, headerButtonType = 'disabled', rebuild}) 
     </>
   );
 }
-const mapStateToProps = ({build, buildLogs}) => {
+const mapStateToProps = ({build, buildLogs}:Store) => {
   return {
     build,
     log: buildLogs,
-    headerButtonType: !!build
+    headerButtonType: build ? 'disabled' : 'action' as ButtonTypes
   };
 };
 

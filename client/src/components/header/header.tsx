@@ -1,8 +1,11 @@
 import React from 'react';
 import './header.scss';
 
+export interface HeaderProps {
+  title?:string
+}
 
-function Header({title, children}) {
+const Header:React.FC<HeaderProps> = ({title, children}) => {
   const titleClass = `header__title ${title ? '' : ' text_view_ghost'}`;
   title = title || 'School CI server';
   return (

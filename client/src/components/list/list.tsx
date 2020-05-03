@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import Button from '../button';
 import './list.scss';
 
-function List({className, clickable, data, renderItem, showMore}) {
+export interface ListProps<T> {
+  className?:string
+  clickable?:boolean
+  data:T[]
+  renderItem(data:T):JSX.Element
+  showMore():void
+}
+
+const List = <T extends object,>({className, clickable, data, renderItem, showMore}:PropsWithChildren<ListProps<T>>) => {
   const classes = [
     'list',
     clickable ? `list_clicable` : '',

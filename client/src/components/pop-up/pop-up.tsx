@@ -2,9 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './pop-up.scss';
 
+export interface PopUpProps {
+  show?: boolean
+  title?:string
+}
 
-function PopUp({children, show, title, onApply}) {
-  if (!show) {
+const PopUp:React.FC<PopUpProps> = ({children, show, title}) => {
+  const el = document.getElementById('pop-up');
+  if (!show || !el) {
     return null;
   }
   return ReactDOM.createPortal(
@@ -14,7 +19,7 @@ function PopUp({children, show, title, onApply}) {
           <div className="pop-up__body">{children}</div>
         </div>
       </div>,
-      document.getElementById('pop-up'),
+      el
   );
 }
-export default React.memo(PopUp);
+export default PopUp;

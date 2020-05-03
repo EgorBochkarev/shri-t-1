@@ -1,7 +1,14 @@
 import React from 'react';
 import './content.scss';
 
-function Content({className, loading = false, children, type, fullAdaptive}) {
+export interface ButtonProps {
+  className?:string
+  loading?: boolean
+  type?:string
+  fullAdaptive?:boolean
+}
+
+const Content:React.FC<ButtonProps> = ({className, loading = false, type, fullAdaptive, children}) => {
   const classes = [
     'content',
     type ? `content_type_${type}` : '',

@@ -39,8 +39,16 @@ module.exports = (env) => {
   };
   return {
     mode: isProd ? 'production' : isDev && 'development',
+    resolve: {
+      extensions: ['.ts', '.tsx', '.js', '.json']
+    },
     module: {
       rules: [
+        {
+          test: /\.(ts|tsx)$/,
+          exclude: /node_modules/,
+          loader: ['awesome-typescript-loader']
+        },
         {
           test: /\.(js)$/,
           exclude: /node_modules/,
