@@ -1,0 +1,5 @@
+### Health check
+GET http://localhost:3001/health
+
+### Get settings
+POST http://localhost:3001/build?id=test&commitHash=1933a6940a88d51e8850c8047e14b1df0d3ad386&repoName=EgorBochkarev%2Ftire-fitting&buildCommand=echo+%22finish%22

@@ -1,5 +1,9 @@
+### Health check
+GET http://localhost:3000/health
+
 ### Get settings
 GET http://localhost:3000/api/settings
+
 ### Set settings
 POST http://localhost:3000/api/settings
 Content-Type: application/json

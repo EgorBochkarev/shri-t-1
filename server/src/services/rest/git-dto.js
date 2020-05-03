@@ -7,8 +7,13 @@ class GitDTO {
     return GitDTO.axiosInstance.get(`${GitDTO.baseURL}/${repo}/commits/${commitHash}`).then(({data}) => {
       const {sha, commit} = data;
       return new CommitModel(sha, commit.message, commit.author.name);
-    }).catch((error) => {
-      console.log(error);
+    }).catch(({response}) => {
+      console.error(
+          `Request ${response.config.url} was failed`,
+          `with status ${response.status} and message:`,
+          response.data.message,
+          `Documentation: ${response.data.documentation_url}`
+      );
     });
   }
 
@@ -20,8 +25,13 @@ class GitDTO {
     return GitDTO.axiosInstance.get(myURL.toString()).then(({data}) => {
       // eslint-disable-next-line max-len
       return data.map(({sha, commit}) => new CommitModel(sha, commit.message, commit.author.name));
-    }).catch((error) => {
-      console.log(error);
+    }).catch(({response}) => {
+      console.error(
+          `Request ${response.config.url} was failed`,
+          `with status ${response.status} and message:`,
+          response.data.message,
+          `Documentation: ${response.data.documentation_url}`
+      );
     });
   }
 
@@ -33,15 +43,20 @@ class GitDTO {
       },
     }).then(({data}) => {
       return data.map((branch) => branch.name);
-    }).catch((error) => {
-      console.log(error);
+    }).catch(({response}) => {
+      console.error(
+          `Request ${response.config.url} was failed`,
+          `with status ${response.status} and message:`,
+          response.data.message,
+          `Documentation: ${response.data.documentation_url}`
+      );
     });
   }
 }
 GitDTO.baseURL = 'https://api.github.com/repos',
 GitDTO.axiosInstance = axios.create({
   headers: {
-    Accept: 'application/vnd.github.cloak-preview',
+    Accept: 'application/vnd.github.cloak-preview'
   },
 });
 

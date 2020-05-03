@@ -4,7 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_TLS_REJECT_UNAUTHORIZED=0 node index.js"
+    "start": "node index.js",
+    "mock": "concurrently --kill-others \"node ./mock/mock.js\" \"node index.js -s http://localhost:3003\"",
+    "mock-server": "node ./mock/mock.js",
+    "start-with-mock": "node index.js -s http://localhost:3003",
+    "test": "mocha --timeout 10000",
+    "selenium-start": "selenium-standalone start",
+    "hermione": "hermione",
+    "hermione-gui": "hermione gui"
   },
   "engines": {
     "node": ">=11.13.0"
@@ -12,10 +19,22 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ansi-to-html": "^0.6.14",
     "axios": "^0.19.2",
+    "command-line-args": "^5.1.1",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "js-queue": "^2.0.0",
     "node-cache": "^5.1.0",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "concurrently": "^5.1.0",
+    "hermione": "^3.1.0",
+    "html-reporter": "^5.15.2",
+    "mocha": "^7.1.1",
+    "ramda": "^0.27.0",
+    "sinon": "^9.0.2"
   }
 }

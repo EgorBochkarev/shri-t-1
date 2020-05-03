@@ -1,0 +1,61 @@
+### Get settings
+GET http://localhost:3003/config
+### Set settings
+POST http://localhost:3003/config
+Content-Type: application/json
+
+{
+    "repoName": "EgorBochkarev/tire-fitting",
+    "buildCommand": "echo \"finish\"",
+    "mainBranch": "master",
+    "period": 5
+}
+
+### Delete settings
+DELETE http://localhost:3003/config
+
+
+### Get all builds
+GET http://localhost:3003/build/list?offset=0&limit=5
+
+
+### Get build info
+GET http://localhost:3003/build/details?buildId=IDn1
+
+### Get build logs
+GET http://localhost:3003/build/log?buildId=IDn1
+
+
+### Build request
+POST http://localhost:3003/build/request
+Content-Type: application/json
+
+{
+  "commitMessage": "string",
+  "commitHash": "string",
+  "branchName": "string",
+  "authorName": "string"
+}
+
+### Start build
+POST http://localhost:3003/build/start
+Content-Type: application/json
+
+{
+  "buildId": "IDn1",
+  "dateTime": "2020-04-12T22:22:04.009Z"
+}
+
+
+### Finish build
+POST http://localhost:3003/build/finish
+Content-Type: application/json
+
+{
+  "buildId": "IDn1",
+  "duration": 0,
+  "success": true,
+  "buildLog": "string"
+}
+
+
