@@ -25,12 +25,12 @@ const Details:React.FC<DetailsPageProps> = ({build, log, onMount, headerButtonTy
   useEffect(() => {
     onMount();
   }, []);
+  const onRebuild = useCallback(() => {
+    build && rebuild(build.commitHash);
+  }, [rebuild, build])
   if (!build) {
     return <div></div>
   }
-  const onRebuild = useCallback(() => {
-    rebuild(build.commitHash);
-  }, [rebuild])
   return (
     <>
       <Header>

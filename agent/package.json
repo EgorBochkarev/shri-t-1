@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "node -r ts-node/register index.ts -a"
+    "start": "node -r ts-node/register index.ts",
+    "start-alone": "node -r ts-node/register index.ts -a"
   },
   "engines": {
     "node": ">=11.13.0"

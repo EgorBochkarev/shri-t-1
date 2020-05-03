@@ -42,13 +42,13 @@ const Form = <T extends object,>({
     if (formData) {
       onSubmit && onSubmit(formData);
     }
-  }, [onSubmit]);
+  }, [onSubmit, formData]);
   const onChange = useCallback((value, name) => {
     setFormData({
       ...formData,
       [name]: value
     });
-  }, [])
+  }, [formData])
   return (
     <form className={classes.join(' ')} onSubmit={(e) => e.preventDefault()}>
       {(title || description) ? <div className="form__title">
