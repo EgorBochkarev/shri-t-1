@@ -3,7 +3,7 @@ const currentCacheName = 'ci-build-v1';
 
 const getCacheFirst = (request) => {
   return caches.match(request).then(function(response) {
-    if (response !== undefined) {
+    if (response) {
       return response;
     } else {
       return fetch(request).then((response) => {
