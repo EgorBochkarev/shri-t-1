@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const SvgSpriteHtmlWebpackPlugin = require('svg-sprite-html-webpack');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 module.exports = (env) => {
   const {mode = 'development'} = env || {};
@@ -16,6 +17,7 @@ module.exports = (env) => {
 
   const getPlugins = () => {
     const plugins = [
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Builder CI',
         template: 'pages/index.html',
@@ -87,10 +89,16 @@ module.exports = (env) => {
       ]
     },
     plugins: getPlugins(),
+    entry: {
+      main: './src/index.tsx',
+      sw: './src/sw.js'
+    },
     output: {
       path: __dirname + '/dist',
-      filename: 'main.js',
-      publicPath: '/'
+      publicPath: '/',
+      filename: ({chunk}) => {
+        return chunk.name === 'sw' ? '[name].js': '[name]-[hash:8].js';
+      }
     },
     devServer: {
       open: true,

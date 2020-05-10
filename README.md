@@ -3,11 +3,21 @@
 ## Info
 
 * Для установки запустите `npm i`, docker deamon, в файле `./server/.env` введите свой `ACCESS_TOKEN`
-* Приложение использует [GitHub REST API v3](https://developer.github.com/v3/), для полноценной работы, в файлах `./server/.env` и `./agent/.env` заполните крэдами переменные `GIT_HUB_LOGIN` и `GIT_HUB_PSWD`
+* Приложение использует [GitHub REST API v3](https://developer.github.com/v3/), для полноценной работы, в файле `./server/.env` заполните крэдами переменные `GIT_HUB_LOGIN` и `GIT_HUB_PSWD`
 * Перед запуском сервера соберите UI командой `npm run build`;
 * Запуск тестов `npm test` (Out of date)
-* Запуск сервера и агентов: `cd $dir && npm ci && npm start`, где `$dir` это `server` или `agent`
+* Запуск сервера и агентов: `cd $dir && npm ci && npm start`, где `$dir` это `server` или `agent`, клинт будет доступен по ссылке: [http://localhost:3000/](http://localhost:3000/)
+* Запуск дев режима для клиента: `cd client && npm ci && npm start`
 * Мое задание можно использовать как показательный пример ошибок
+
+## Client resource caching
+
+В идеале хорошо бы подключить: [Workbox modules](https://developers.google.com/web/tools/workbox/modules) используя [InjectManifest plugin](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-webpack-plugin.InjectManifest), где удобно можно выбрать [разные стратегии](https://developers.google.com/web/tools/workbox/modules/workbox-strategies). Но задача была другая.
+
+
+Клиентская часть собирается веб паком, при изменении чего либо, меняется хэш, а значит и название файлов, при этом перед релизом нужно изменить название кэш стора (переменная - currentCacheName в коде сервис воркера) (нужно автоматизировать) => меняется и сервис воркер. Картинок и других медиа файлов в проекте нет, поэтому получается что при изменении чего либо в коде, нужно перерегистрировать воркер, а значит обновится кэш. Изходя из этого была выбрана стратегия [Cache First (Cache Falling Back to Network)](https://developers.google.com/web/tools/workbox/modules/workbox-strategies#cache_first_cache_falling_back_to_network). Данная стратегия подходит для стабильных продуктов где прошла активная стадия разработки.
+
+При изменении сервис воркера у пользователя будет появляться нотификация, что доступна новая версия приложения и по желанию можно обновиться на новую версию.
 
 ## Tests (Out of date)
 
