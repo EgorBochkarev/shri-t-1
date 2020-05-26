@@ -12,6 +12,7 @@ import Content from '../content';
 import { Store } from '../../reducer';
 import { Build } from '../../../../server/src/services/rest/build-dto';
 import { ButtonTypes } from '../button/button';
+import { useTranslation } from 'react-i18next';
 
 export interface DetailsPageProps {
   onMount():void;
@@ -19,12 +20,14 @@ export interface DetailsPageProps {
   log?:string;
   headerButtonType:ButtonTypes;
   rebuild(commitHash:string):void;
+  title:string
 }
 
-const Details:React.FC<DetailsPageProps> = ({build, log, onMount, headerButtonType = 'disabled', rebuild}) => {
+const Details:React.FC<DetailsPageProps> = ({build, log, onMount, headerButtonType = 'disabled', rebuild, title}) => {
   useEffect(() => {
     onMount();
   }, []);
+  const { t, i18n } = useTranslation();
   const onRebuild = useCallback(() => {
     build && rebuild(build.commitHash);
   }, [rebuild, build])
@@ -33,8 +36,8 @@ const Details:React.FC<DetailsPageProps> = ({build, log, onMount, headerButtonTy
   }
   return (
     <>
-      <Header>
-        <Button size="s" icon="rebuild" type={headerButtonType} onClick={onRebuild} adaptive>Rebuild</Button>
+      <Header title={title}>
+        <Button size="s" icon="rebuild" type={headerButtonType} onClick={onRebuild} adaptive>{t("Rebuild")}</Button>
         <Link to="/settings">
           <Button size="s" icon="settings"></Button>
         </Link>
@@ -50,11 +53,12 @@ const Details:React.FC<DetailsPageProps> = ({build, log, onMount, headerButtonTy
     </>
   );
 }
-const mapStateToProps = ({build, buildLogs}:Store) => {
+const mapStateToProps = ({build, buildLogs, settings}:Store) => {
   return {
     build,
     log: buildLogs,
-    headerButtonType: build ? 'disabled' : 'action' as ButtonTypes
+    headerButtonType: build ? 'disabled' : 'action' as ButtonTypes,
+    title: settings && settings.repoName || ''
   };
 };
 

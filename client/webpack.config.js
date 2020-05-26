@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const SvgSpriteHtmlWebpackPlugin = require('svg-sprite-html-webpack');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = (env) => {
   const {mode = 'development'} = env || {};
@@ -28,6 +29,11 @@ module.exports = (env) => {
           'src/svg/*.svg',
         ],
         append: true
+      }),
+      new CopyPlugin({
+        patterns: [
+          'public'
+        ],
       })
     ];
     if (isProd) {

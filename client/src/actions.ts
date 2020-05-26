@@ -28,6 +28,7 @@ const loadInitialPageData:ThunkResultFunction<void> = () => (dispatch) => {
         const match = location.pathname.match(/^\/build\/(.*)/);
         const buildId = match && match[1];
         if (buildId) {
+          dispatch(loadSettings());
           dispatch(loadBuild(buildId));
           dispatch(loadBuildLogs(buildId));
         }

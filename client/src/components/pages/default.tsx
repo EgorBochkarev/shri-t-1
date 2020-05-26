@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import {loadInitialPageData} from '../../actions';
 import {Redirect} from 'react-router-dom';
-import { Store } from '../../reducer';
+import {Store} from '../../reducer';
 
 interface DefaultPageProps {
   onMount():void;

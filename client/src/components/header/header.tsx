@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom';
 import React from 'react';
 import './header.scss';
 
@@ -7,11 +8,12 @@ export interface HeaderProps {
 
 const Header:React.FC<HeaderProps> = ({title, children}) => {
   const titleClass = `header__title ${title ? '' : ' text_view_ghost'}`;
-  title = title || 'School CI server';
   return (
     <header className="header">
       <div className="content content_align_horisontal">
-        <h1 className={titleClass}>{title}</h1>
+        <Link to="/history">
+          <h1 className={titleClass}>{title}</h1>
+        </Link>
         { children ? <div className="header__tools">{children}</div> : null }
       </div>
     </header>

@@ -1,4 +1,5 @@
 import React, {useEffect, useState, useCallback} from 'react';
+import { useTranslation } from 'react-i18next';
 import {connect} from 'react-redux';
 
 import {loadInitialPageData, loadMoreBuilds, startBuild} from '../../actions';
@@ -38,6 +39,7 @@ const History:React.FC<HistoryPageProps> = ({builds = [], title, onMount, showMo
   useEffect(() => {
     onMount();
   }, []);
+  const { t, i18n } = useTranslation();
   const [showPopUp, setShowPopUp] = useState(false);
   const showRunBuildWindow = useCallback(
       () => setShowPopUp(true),
@@ -47,7 +49,7 @@ const History:React.FC<HistoryPageProps> = ({builds = [], title, onMount, showMo
     <>
       <Header title={title}>
         <Button size="s" icon="play" adaptive onClick={showRunBuildWindow}>
-          Run build
+          {t('Run build')}
         </Button>
         <Link to="/settings">
           <Button size="s" icon="settings"></Button>
@@ -62,13 +64,13 @@ const History:React.FC<HistoryPageProps> = ({builds = [], title, onMount, showMo
           />
         </Content>
       </div>
-      <PopUp show={showPopUp} title="New build">
+      <PopUp show={showPopUp} title={t("New build")}>
         <Form type="small"
           metaData={
             [{
-              label: 'Enter the commit hash whitch you want to build',
+              label: t('Enter the commit hash whitch you want to build'),
               name: 'hash',
-              placeholder: 'Commit hash',
+              placeholder: t('Commit hash'),
               cleanable: true
             }]
           }

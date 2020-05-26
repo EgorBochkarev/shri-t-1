@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import { useTranslation } from 'react-i18next';
 import {connect} from 'react-redux';
 
 import {
@@ -20,40 +21,42 @@ export interface SettingsPageProps {
 }
 
 const Settings:React.FC<SettingsPageProps> = ({settings, onMount, onSubmit, onCancel}) => {
+  const {t} = useTranslation();
   useEffect(() => {
     onMount();
   }, []);
+  const [numberLabel, numberUnit] = t("Synchronize every {x} minutes").split(' {x} ');
   return (
     <>
-      <Header></Header>
+      <Header title={t('School CI server')}></Header>
       <div className="page__scrolled-container">
         <div className="content content_type_main">
-          <Form title="Settings" description="Configure repository connection and synchronization settings" metaData={[
+          <Form title={t('Settings')} description={t("Configure repository connection and synchronization settings")} metaData={[
             {
               name: 'repoName',
-              label: 'GitHub repository',
-              placeholder: 'user-name/repo-name',
+              label: t('GitHub repository'),
+              placeholder: t('user-name/repo-name'),
               pattern: /^[\w-]+\/[\w-]+$/,
               required: true,
               cleanable: true
             },
             {
               name: 'buildCommand',
-              label: 'Build command',
-              placeholder: 'bash command',
+              label: t('Build command'),
+              placeholder: t('bash command'),
               required: true,
               cleanable: true
             },
             {
               name: 'mainBranch',
-              label: 'Main branch',
-              placeholder: 'branch name',
+              label: t('Main branch'),
+              placeholder: t('branch name'),
               cleanable: true
             },
             {
               name: 'period',
-              label: 'Synchronize every',
-              unit: 'minutes',
+              label: numberLabel,
+              unit: numberUnit,
               type: 'number',
               horizontal: true,
               fieldClass: 'form__field_small'

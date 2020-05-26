@@ -1,4 +1,5 @@
 import React, {useState, useEffect, PropsWithChildren, useCallback} from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Button from '../button';
 import Field from '../field';
@@ -30,8 +31,8 @@ const Form = <T extends object,>({
     className || ''
   ];
 
-  // const [formData, setFormData] = useState(!data ? {} : data);
   const [formData, setFormData] = useState(data);
+  const { t, i18n } = useTranslation();
 
   useEffect(()=> {
     if (data && JSON.stringify(data) !== JSON.stringify(formData)) {
@@ -72,8 +73,8 @@ const Form = <T extends object,>({
         />;
       })}
       <div className="form__tools">
-        <Button size="m" type="action" onClick={submit}>Save</Button>
-        <Button size="m" onClick={onCancel}>Cancel</Button>
+        <Button size="m" type="action" onClick={submit}>{t('Save')}</Button>
+        <Button size="m" onClick={onCancel}>{t('Cancel')}</Button>
       </div>
     </form>
   );

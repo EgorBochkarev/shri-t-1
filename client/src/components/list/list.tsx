@@ -1,4 +1,5 @@
 import React, { PropsWithChildren } from 'react';
+import { useTranslation } from 'react-i18next';
 import Button from '../button';
 import './list.scss';
 
@@ -11,6 +12,7 @@ export interface ListProps<T> {
 }
 
 const List = <T extends object,>({className, clickable, data, renderItem, showMore}:PropsWithChildren<ListProps<T>>) => {
+  const { t, i18n } = useTranslation();
   const classes = [
     'list',
     clickable ? `list_clicable` : '',
@@ -19,7 +21,7 @@ const List = <T extends object,>({className, clickable, data, renderItem, showMo
   return (
     <div className={classes.join(' ')}>
       {data.map((data) => renderItem(data))}
-      <Button size="s" className="list__button" onClick={showMore}>Show more</Button>
+      <Button size="s" className="list__button" onClick={showMore}>{t('Show more')}</Button>
     </div>
   );
 }
