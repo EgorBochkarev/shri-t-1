@@ -4,8 +4,9 @@ import { Configuration } from '../../server/src/services/rest/conf-dto';
 import { Build } from '../../server/src/services/rest/build-dto';
 import { Store } from './reducer';
 import { ThunkAction } from 'redux-thunk';
+import { i18n } from "i18next";
 
-type ThunkResult<R> = ThunkAction<R, Store, undefined, any>;
+export type ThunkResult<R> = ThunkAction<R, Store, undefined, any>;
 type ThunkResultFunction<R> = () => ThunkResult<R>;
 
 
@@ -88,6 +89,9 @@ const startBuild = (commitHash:string):ThunkResult<void> => (dispatch, getState)
   });
 };
 
+const changeLanguage = (i18n:i18n):ThunkResult<void> => (dispatch, getState) => {
+  i18n.language === 'ru' ? i18n.changeLanguage('en') : i18n.changeLanguage('ru');
+}
 
 export type ActionObject = {
   type:string,
@@ -109,5 +113,6 @@ export {
   loadBuild,
   loadBuildLogs,
   startBuild,
+  changeLanguage,
   redirect
 };
