@@ -3,6 +3,7 @@ import Icon from '../icon';
 import ExtendIcon from '../extend-icon';
 import cn from '../../utils/class-name';
 import {formatISODate, countDuration} from '../../utils/date-formatter';
+import { useTranslation } from 'react-i18next';
 import './card.scss';
 import { Build } from '../../../../server/src/services/rest/build-dto';
 
@@ -22,6 +23,7 @@ export interface CardProps {
 }
 
 const Card:React.FC<CardProps> = ({className, clickable, view, data}) => {
+  const { t, i18n } = useTranslation();
   const {
     buildNumber, commitMessage, commitHash,
     branchName, authorName, status, start, duration
@@ -52,8 +54,8 @@ const Card:React.FC<CardProps> = ({className, clickable, view, data}) => {
         </div>
       </div>
       <div className="card__meta">
-        <ExtendIcon icon="calendar">{formatISODate(start)}</ExtendIcon>
-        <ExtendIcon icon="stopwatch">{countDuration(duration)}</ExtendIcon>
+        <ExtendIcon icon="calendar">{formatISODate(start, i18n.language as any)}</ExtendIcon>
+        <ExtendIcon icon="stopwatch">{countDuration(duration, i18n.language as any)}</ExtendIcon>
       </div>
     </div>
   );

@@ -1,10 +1,14 @@
 import {format, formatDistanceStrict, sub} from 'date-fns';
-import {ru} from 'date-fns/locale';
+import {ru, enGB as en} from 'date-fns/locale';
 
-const formatISODate = (timeISO?:string) => {
-  return timeISO && format(new Date(timeISO), 'd LLL HH:mm', {locale: ru})
+type Locale = 'en' | 'ru';
+const locales = {ru, en}
+
+const formatISODate = (timeISO?:string, locale:Locale = 'en') => {
+  return timeISO && format(new Date(timeISO), 'd LLL HH:mm', {locale: locales[locale]})
 };
-const countDuration = (durationInMiliseconds?:string) => {
+const countDuration = (durationInMiliseconds?:string, locale:Locale = 'en') => {
+  console.log('Locale', ru);
   if (!durationInMiliseconds) {
     return durationInMiliseconds;
   }
@@ -21,17 +25,17 @@ const countDuration = (durationInMiliseconds?:string) => {
   if (clearHours > 0) {
     result.push(formatDistanceStrict(fakeStartDate, sub(fakeStartDate, {
       hours: clearHours
-    }), {locale: ru, unit: 'hour'}));
+    }), {locale: locales[locale], unit: 'hour'}));
   }
   if (clearMins > 0) {
     result.push(formatDistanceStrict(fakeStartDate, sub(fakeStartDate, {
       minutes: clearMins
-    }), {locale: ru, unit: 'minute'}));
+    }), {locale: locales[locale], unit: 'minute'}));
   }
   if (clearHours === 0 && clearSec > 0) {
     result.push(formatDistanceStrict(fakeStartDate, sub(fakeStartDate, {
       seconds: clearSec
-    }), {locale: ru, unit: 'second'}));
+    }), {locale: locales[locale], unit: 'second'}));
   }
 
   return result.join(' ');
