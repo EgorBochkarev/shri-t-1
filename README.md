@@ -109,5 +109,21 @@ Scenarios:
     6. Check build card
     7. Check build logs
 
+### Localization
+* Kак приложение узнает, какой язык выбран у пользователя?
+    
+    Я использовал [i18next-browser-languageDetector](https://github.com/i18next/i18next-browser-languageDetector), который использует [navigator.languages](https://developer.mozilla.org/ru/docs/Web/API/NavigatorLanguage/languages) для определения дефолтного языка для пользователя, далее он сохраняет выбор языка в кукисах
+
+* Kакие типы контента поддерживают переключение языка и как вы это реализовали
+
+    Текст, дата и время. Использовал [i18next](https://github.com/i18next/i18next) для локализации текстовых переменных
+
+* Kак переводы попадают на клиент? как изменилась сборка приложения?
+
+    Локализация загружается вначале запуска как джейсон файл. При сборке все локализации копируются в output папку.
+
+
 ## Links
-[Figma](https://www.figma.com/file/vA6BJJ3AiWar3Q3bq30eyG/SHRI-homework-specification)
+
+* [Figma](https://www.figma.com/file/vA6BJJ3AiWar3Q3bq30eyG/SHRI-homework-specification)
+* [Git Localize](https://gitlocalize.com/repo/4715)
